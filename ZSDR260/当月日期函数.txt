@@ -1,0 +1,11 @@
+DateSerial(Year(Now()), Month(Now()), 1).ToString("yyyy.MM.dd")
+DateSerial(Year(Now()), Month(Now()) + 1, 0).ToString("yyyy.MM.dd")
+
+当月日期函数
+
+
+
+Date.Now.AddDays(-1).ToString("yyyy.MM.dd")
+
+
+当前日期函数
