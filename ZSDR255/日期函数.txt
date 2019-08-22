@@ -1,0 +1,2 @@
+Date.Now.AddDays(-365).ToString("yyyy.MM.dd")   date_start
+Date.Now.ToString("yyyy.MM.dd")     date_stop
