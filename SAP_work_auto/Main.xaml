@@ -72,7 +72,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <TryCatch.Try>
-          <Sequence DisplayName="Start" sap:VirtualizedContainerService.HintSize="406,1903" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Start" sap:VirtualizedContainerService.HintSize="406,2030" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="strTO" />
               <Variable x:TypeArguments="x:String" Name="strCC" />
@@ -128,7 +128,7 @@
               </ui:InvokeWorkflowFile.Arguments>
             </ui:InvokeWorkflowFile>
             <Delay DisplayName="延迟" Duration="00:01:00" sap:VirtualizedContainerService.HintSize="368,22" sap2010:WorkflowViewState.IdRef="Delay_10" />
-            <Sequence DisplayName="Send Mail" sap:VirtualizedContainerService.HintSize="368,280" sap2010:WorkflowViewState.IdRef="Sequence_4">
+            <Sequence DisplayName="Send Mail" sap:VirtualizedContainerService.HintSize="368,407" sap2010:WorkflowViewState.IdRef="Sequence_4">
               <Sequence.Variables>
                 <Variable x:TypeArguments="x:String" Name="strOutput" />
               </Sequence.Variables>
@@ -146,6 +146,14 @@
                   <InArgument x:TypeArguments="x:String">["D:\RPA_Demo\MB52\MB52_List.xlsx"]</InArgument>
                 </Assign.Value>
               </Assign>
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="330,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_17" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Mail_Setting\Main.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="x:String" x:Key="IN_RPA_ID">MB52</InArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="OUT_TO">[strTO]</OutArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="OUT_CC">[strCC]</OutArgument>
+                  <OutArgument x:TypeArguments="x:String" x:Key="OUT_BCC" />
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
               <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="330,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_15" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Send_Mail\Main.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
                   <OutArgument x:TypeArguments="x:Boolean" x:Key="result_succeed" />
@@ -154,8 +162,8 @@
                   <InArgument x:TypeArguments="x:String" x:Key="smtp_password" />
                   <InArgument x:TypeArguments="x:String" x:Key="smtp_sendername" />
                   <InArgument x:TypeArguments="x:String" x:Key="send_mail_bcc" />
-                  <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc">["xuyanhong@yaskawa.com.cn" &amp; ";" &amp; "upsky@yaskawa.com.cn" &amp; ";" &amp; "tangzhiqiang@yaskawa.com.cn" &amp; ";" &amp; "jhy_kim@yaskawa.com.cn" &amp; ";" &amp; "yjs5101@yaskawa.com.cn" &amp; ";" &amp; "sydzhoufang@yaskawa.com.cn" &amp; ";" &amp; "shijinhua@yaskawa.com.cn"]</InArgument>
-                  <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">gaohuiliang@yaskawa.com.cn</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc">[strCC]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">[strTO]</InArgument>
                   <InArgument x:TypeArguments="x:Boolean" x:Key="use_outlook">False</InArgument>
                   <InArgument x:TypeArguments="x:Boolean" x:Key="auto_flag" />
                   <InArgument x:TypeArguments="x:String" x:Key="send_mail_subject">["【RPA】变频器每日在库管理送付" &amp; Date.Now.ToString("(yyyyMMdd)")]</InArgument>

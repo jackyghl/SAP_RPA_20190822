@@ -572,7 +572,11 @@
                     </ui:ExcelApplicationScope>
                     <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="430,95" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[now.ToString &amp;&quot;:数据汇总ended.&quot;]" />
                   </Sequence>
-                  <Sequence DisplayName="邮件发送" sap:VirtualizedContainerService.HintSize="368,550" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <Sequence DisplayName="邮件发送" sap:VirtualizedContainerService.HintSize="368,677" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="strTO" />
+                      <Variable x:TypeArguments="x:String" Name="strCC" />
+                    </Sequence.Variables>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -588,6 +592,14 @@
                         <InArgument x:TypeArguments="x:String" xml:space="preserve">[strOutput &amp; "tempZSDR260" &amp;  ".xlsx"]</InArgument>
                       </Assign.Value>
                     </Assign>
+                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="330,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Mail_Setting\Main.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="IN_RPA_ID">MB52</InArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="OUT_TO">[strTO]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="OUT_CC">[strCC]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="OUT_BCC" />
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
                     <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="330,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Send_Mail\Main.xaml">
                       <ui:InvokeWorkflowFile.Arguments>
                         <OutArgument x:TypeArguments="x:Boolean" x:Key="result_succeed" />
@@ -596,12 +608,12 @@
                         <InArgument x:TypeArguments="x:String" x:Key="smtp_password" />
                         <InArgument x:TypeArguments="x:String" x:Key="smtp_sendername" />
                         <InArgument x:TypeArguments="x:String" x:Key="send_mail_bcc" />
-                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc">["xuyanhong@yaskawa.com.cn" &amp; ";" &amp; "upsky@yaskawa.com.cn" &amp; ";" &amp; "tangzhiqiang@yaskawa.com.cn" &amp; ";" &amp; "jhy_kim@yaskawa.com.cn" &amp; ";" &amp; "yjs5101@yaskawa.com.cn" &amp; ";" &amp; "sydzhoufang@yaskawa.com.cn" &amp; ";" &amp; "shijinhua@yaskawa.com.cn"]</InArgument>
-                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">gaohuiliang@yaskawa.com.cn</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc">[strCC]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">[strTO]</InArgument>
                         <InArgument x:TypeArguments="x:Boolean" x:Key="use_outlook">False</InArgument>
                         <InArgument x:TypeArguments="x:Boolean" x:Key="auto_flag" />
                         <InArgument x:TypeArguments="x:String" x:Key="send_mail_subject">["【RPA】当月发货清单" &amp; Date.Now.ToString("(yyyyMMdd)")]</InArgument>
-                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_body" xml:space="preserve">[Date.Now.ToString("yyyy年MM月dd日") &amp; "的发货清单，请确认。如有问题，请及时联系。" &amp; vbcrlf &amp;  vbcrlf &amp; "（Yaskawa IT课）"]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_body" xml:space="preserve">[Date.Now.ToString("yyyy年MM月dd日") &amp; "的发货清单，请确认。如有问题，请及时联系。" &amp; vbcrlf &amp;  vbcrlf &amp; "（Yaskawa IT）"]</InArgument>
                         <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment1">[strOutput]</InArgument>
                         <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment2" />
                         <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment3" />
