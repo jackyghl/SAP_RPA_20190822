@@ -612,7 +612,7 @@
                     </ui:ExcelApplicationScope>
                     <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="330,95" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[now.ToString &amp;&quot;:数据汇总ended.&quot;]" />
                   </Sequence>
-                  <Sequence DisplayName="邮件发送" sap:VirtualizedContainerService.HintSize="216,70" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                  <Sequence DisplayName="邮件发送" sap:VirtualizedContainerService.HintSize="368,677" sap2010:WorkflowViewState.IdRef="Sequence_8">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="x:String" Name="strTO" />
                       <Variable x:TypeArguments="x:String" Name="strCC" />
@@ -653,7 +653,7 @@
                         <InArgument x:TypeArguments="x:Boolean" x:Key="use_outlook">False</InArgument>
                         <InArgument x:TypeArguments="x:Boolean" x:Key="auto_flag" />
                         <InArgument x:TypeArguments="x:String" x:Key="send_mail_subject">["【RPA】生产订单残数据" &amp; Date.Now.ToString("(yyyyMMdd)")]</InArgument>
-                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_body" xml:space="preserve">[Date.Now.ToString("yyyy年MM月dd日") &amp; "的生产订单残清单，请确认。如有问题，请及时联系。" &amp; vbcrlf &amp;  vbcrlf &amp; "（Yaskawa IT 课）"]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_body" xml:space="preserve">[Date.Now.ToString("yyyy年MM月dd日") &amp; "的生产订单残清单，请确认。如有问题，请及时联系。" &amp; vbcrlf &amp;  vbcrlf &amp; "（Yaskawa IT ）"]</InArgument>
                         <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment1">[strOutput]</InArgument>
                         <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment2" />
                         <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment3" />
