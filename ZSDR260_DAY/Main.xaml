@@ -691,7 +691,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="430,95" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[now.ToString &amp;&quot;:数据汇总started.&quot;]" />
-                    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel 应用程序范围" sap:VirtualizedContainerService.HintSize="430,260" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="D:\RPA_Demo\Macro\Mb52_temp.xlsm">
+                    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel 应用程序范围" sap:VirtualizedContainerService.HintSize="430,260" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" Visible="False" WorkbookPath="D:\RPA_Demo\Macro\Mb52_temp.xlsm">
                       <ui:ExcelApplicationScope.Body>
                         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
                           <ActivityAction.Argument>

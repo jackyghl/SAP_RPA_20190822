@@ -66,7 +66,7 @@
           <av:Size x:Key="ShapeSize">216,70</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="925,1583" sap2010:WorkflowViewState.IdRef="Sequence_10">
+      <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="468,403" sap2010:WorkflowViewState.IdRef="Sequence_10">
         <Sequence.Variables>
           <Variable x:TypeArguments="x:String" Default="D:\RPA_File\MB52\temp\" Name="strEndfilePath" />
           <Variable x:TypeArguments="x:Boolean" Default="True" Name="blnTemp" />
@@ -76,29 +76,30 @@
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <TryCatch DisplayName="Try Catch 在库导出" sap:VirtualizedContainerService.HintSize="887,1491" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+        <TryCatch DisplayName="Try Catch 在库导出" sap:VirtualizedContainerService.HintSize="430,311" sap2010:WorkflowViewState.IdRef="TryCatch_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
           <TryCatch.Try>
-            <Sequence DisplayName="在库导出" sap:VirtualizedContainerService.HintSize="853,1254" sap2010:WorkflowViewState.IdRef="Sequence_7">
+            <Sequence DisplayName="在库导出" sap:VirtualizedContainerService.HintSize="216,70" sap2010:WorkflowViewState.IdRef="Sequence_7">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <ui:PathExists DisplayName="路径存在" Exists="[blnTemp]" sap:VirtualizedContainerService.HintSize="815,91" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="[strEndfilePath]" PathType="File" />
-              <If Condition="[blnTemp=false]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="815,1031" sap2010:WorkflowViewState.IdRef="If_1">
+              <If Condition="[blnTemp=false]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="815,1444" sap2010:WorkflowViewState.IdRef="If_1">
                 <If.Then>
-                  <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="444,878" sap2010:WorkflowViewState.IdRef="Sequence_6">
+                  <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="444,1291" sap2010:WorkflowViewState.IdRef="Sequence_6">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Sequence DisplayName="main process" sap:VirtualizedContainerService.HintSize="406,693" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                    <Sequence DisplayName="main process" sap:VirtualizedContainerService.HintSize="406,1106" sap2010:WorkflowViewState.IdRef="Sequence_4">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -471,18 +472,19 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </ui:LogMessage>
-                        <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel 应用程序范围" sap:VirtualizedContainerService.HintSize="330,53" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="D:\RPA_Demo\Macro\Mb52_temp.xlsm">
+                        <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel 应用程序范围" sap:VirtualizedContainerService.HintSize="430,322" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" Visible="False" WorkbookPath="D:\RPA_Demo\Macro\Mb52_temp.xlsm">
                           <ui:ExcelApplicationScope.Body>
                             <ActivityAction x:TypeArguments="ui:WorkbookApplication">
                               <ActivityAction.Argument>
                                 <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
                               </ActivityAction.Argument>
-                              <Sequence DisplayName="执行" sap:VirtualizedContainerService.HintSize="368,151" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                              <Sequence DisplayName="执行" sap:VirtualizedContainerService.HintSize="368,213" sap2010:WorkflowViewState.IdRef="Sequence_21">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
+                                <ui:Delete ContinueOnError="{x:Null}" DisplayName="删除" sap:VirtualizedContainerService.HintSize="330,22" sap2010:WorkflowViewState.IdRef="Delete_1" Path="D:\RPA_Demo\MB52\MB52_List.xlsx" />
                                 <ui:ExecuteMacro ContinueOnError="{x:Null}" MacroOutput="{x:Null}" DisplayName="执行宏" sap:VirtualizedContainerService.HintSize="330,59" sap2010:WorkflowViewState.IdRef="ExecuteMacro_1" MacroName="Init" />
                               </Sequence>
                             </ActivityAction>
@@ -494,7 +496,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                         </ui:ExcelApplicationScope>
-                        <Sequence DisplayName="send mail with Export Data" sap:VirtualizedContainerService.HintSize="368,407" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                        <Sequence DisplayName="send mail with Export Data" sap:VirtualizedContainerService.HintSize="330,70" sap2010:WorkflowViewState.IdRef="Sequence_22">
                           <Sequence.Variables>
                             <Variable x:TypeArguments="x:String" Default="D:\RPA_File\MB52\temp\" Name="strOutput" />
                             <Variable x:TypeArguments="x:String" Name="strTO" />
@@ -588,10 +590,10 @@
             </Sequence>
           </TryCatch.Try>
           <TryCatch.Catches>
-            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="857,23" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+            <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,141" sap2010:WorkflowViewState.IdRef="Catch`1_1">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
@@ -599,14 +601,18 @@
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="导出异常" sap:VirtualizedContainerService.HintSize="254,70" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                <Sequence DisplayName="导出异常" sap:VirtualizedContainerService.HintSize="254,162" sap2010:WorkflowViewState.IdRef="Sequence_9">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="216,70" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                  <Sequence DisplayName="Error" sap:VirtualizedContainerService.HintSize="368,441" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="etrTO" />
+                      <Variable x:TypeArguments="x:String" Name="etrCC" />
+                    </Sequence.Variables>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -614,6 +620,14 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="330,95" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[exception.Source &amp; &quot;:&quot; &amp; exception.Message]" />
+                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="330,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Mail_Setting\Main.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="IN_RPA_ID">Err01</InArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="OUT_TO">[etrTO]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="OUT_CC">[etrCC]</OutArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="OUT_BCC" />
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
                     <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="330,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Send_Mail\Main.xaml">
                       <ui:InvokeWorkflowFile.Arguments>
                         <OutArgument x:TypeArguments="x:Boolean" x:Key="result_succeed" />
@@ -622,8 +636,8 @@
                         <InArgument x:TypeArguments="x:String" x:Key="smtp_password" />
                         <InArgument x:TypeArguments="x:String" x:Key="smtp_sendername" />
                         <InArgument x:TypeArguments="x:String" x:Key="send_mail_bcc" />
-                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc" />
-                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">gaohuiliang@yaskawa.com.cn</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc">[etrCC]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">[etrTO]</InArgument>
                         <InArgument x:TypeArguments="x:Boolean" x:Key="use_outlook">False</InArgument>
                         <InArgument x:TypeArguments="x:Boolean" x:Key="auto_flag" />
                         <InArgument x:TypeArguments="x:String" x:Key="send_mail_subject">["【RPA处理ERROR通知】SAP在库数据导出" &amp; Date.Now.ToString("(yyyyMMdd)")]</InArgument>

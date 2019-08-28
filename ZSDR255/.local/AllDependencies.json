@@ -1077,9 +1077,9 @@
     "restore": {
       "projectUniqueName": "ZSDR255",
       "projectName": "ZSDR255",
-      "projectPath": "D:\\Demo_backup\\SAP_RPA_20190822\\ZSDR255\\.local",
+      "projectPath": "D:\\RPA_Demo\\ZSDR255\\.local",
       "packagesPath": "C:\\Users\\t005\\.nuget\\packages\\",
-      "outputPath": "D:\\Demo_backup\\SAP_RPA_20190822\\ZSDR255\\.local"
+      "outputPath": "D:\\RPA_Demo\\ZSDR255\\.local"
     },
     "frameworks": {
       "net461": {

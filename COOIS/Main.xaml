@@ -67,7 +67,7 @@
           <av:Size x:Key="ShapeSize">216,53</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <TryCatch DisplayName="Try Catch 处理" sap:VirtualizedContainerService.HintSize="434,513" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch DisplayName="Try Catch 处理" sap:VirtualizedContainerService.HintSize="430,682" sap2010:WorkflowViewState.IdRef="TryCatch_1">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -86,7 +86,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <ui:PathExists Exists="{x:Null}" DisplayName="路径存在" sap:VirtualizedContainerService.HintSize="330,91" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="[strEndfilePath  &amp; now.ToString(&quot;yyyyMMdd&quot;) &amp; &quot;.end&quot;]" PathType="File" />
-            <If Condition="[blnTemp=false]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="625,535" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[blnTemp=false]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="330,53" sap2010:WorkflowViewState.IdRef="If_1">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -579,7 +579,7 @@
                     </Sequence>
                     <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="468,95" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[now.ToString &amp;&quot;:从SAP导出数据ended.&quot;]" />
                   </Sequence>
-                  <Sequence DisplayName="数据汇总" sap:VirtualizedContainerService.HintSize="216,70" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                  <Sequence DisplayName="数据汇总" sap:VirtualizedContainerService.HintSize="368,415" sap2010:WorkflowViewState.IdRef="Sequence_7">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -587,7 +587,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="330,95" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[now.ToString &amp;&quot;:数据汇总started.&quot;]" />
-                    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel 应用程序范围" sap:VirtualizedContainerService.HintSize="330,53" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="D:\RPA_Demo\Macro\Mb52_temp.xlsm">
+                    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel 应用程序范围" sap:VirtualizedContainerService.HintSize="330,53" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" Visible="False" WorkbookPath="D:\RPA_Demo\Macro\Mb52_temp.xlsm">
                       <ui:ExcelApplicationScope.Body>
                         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
                           <ActivityAction.Argument>
@@ -612,7 +612,7 @@
                     </ui:ExcelApplicationScope>
                     <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="330,95" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[now.ToString &amp;&quot;:数据汇总ended.&quot;]" />
                   </Sequence>
-                  <Sequence DisplayName="邮件发送" sap:VirtualizedContainerService.HintSize="368,677" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                  <Sequence DisplayName="邮件发送" sap:VirtualizedContainerService.HintSize="216,70" sap2010:WorkflowViewState.IdRef="Sequence_8">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="x:String" Name="strTO" />
                       <Variable x:TypeArguments="x:String" Name="strCC" />
@@ -673,10 +673,10 @@
           </Sequence>
         </TryCatch.Try>
         <TryCatch.Catches>
-          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,23" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,512" sap2010:WorkflowViewState.IdRef="Catch`1_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
@@ -684,13 +684,25 @@
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
               </ActivityAction.Argument>
-              <Sequence DisplayName="Error" sap:VirtualizedContainerService.HintSize="368,316" sap2010:WorkflowViewState.IdRef="Sequence_11">
+              <Sequence DisplayName="Error" sap:VirtualizedContainerService.HintSize="368,441" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="x:String" Name="etrTO" />
+                  <Variable x:TypeArguments="x:String" Name="etrCC" />
+                </Sequence.Variables>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
                 <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="330,95" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[exception.Source &amp; &quot;:&quot; &amp; exception.Message]" />
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="330,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Mail_Setting\Main.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="IN_RPA_ID">Err01</InArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="OUT_TO">[etrTO]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="OUT_CC">[etrCC]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="OUT_BCC" />
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
                 <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="330,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Send_Mail\Main.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
                     <OutArgument x:TypeArguments="x:Boolean" x:Key="result_succeed" />
@@ -699,8 +711,8 @@
                     <InArgument x:TypeArguments="x:String" x:Key="smtp_password" />
                     <InArgument x:TypeArguments="x:String" x:Key="smtp_sendername" />
                     <InArgument x:TypeArguments="x:String" x:Key="send_mail_bcc" />
-                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc" />
-                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">gaohuiliang@yaskawa.com.cn</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc">[etrCC]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">[etrTO]</InArgument>
                     <InArgument x:TypeArguments="x:Boolean" x:Key="use_outlook">False</InArgument>
                     <InArgument x:TypeArguments="x:Boolean" x:Key="auto_flag" />
                     <InArgument x:TypeArguments="x:String" x:Key="send_mail_subject">["【RPA处理ERROR通知】SYD生产订单残导出异常" &amp; Date.Now.ToString("(yyyyMMdd)")]</InArgument>

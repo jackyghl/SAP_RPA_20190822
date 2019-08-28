@@ -192,13 +192,25 @@
               <ActivityAction.Argument>
                 <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
               </ActivityAction.Argument>
-              <Sequence DisplayName="Error" sap:VirtualizedContainerService.HintSize="368,316" sap2010:WorkflowViewState.IdRef="Sequence_3">
+              <Sequence DisplayName="Error" sap:VirtualizedContainerService.HintSize="368,445" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="x:String" Name="etrTO" />
+                  <Variable x:TypeArguments="x:String" Name="etrCC" />
+                </Sequence.Variables>
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
                 <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="330,95" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[exception.Source &amp; &quot;:&quot; &amp; exception.Message]" />
+                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="330,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_18" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Mail_Setting\Main.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="IN_RPA_ID">Err01</InArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="OUT_TO">[etrTO]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="OUT_CC">[etrCC]</OutArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="OUT_BCC" />
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
                 <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="330,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Send_Mail\Main.xaml">
                   <ui:InvokeWorkflowFile.Arguments>
                     <OutArgument x:TypeArguments="x:Boolean" x:Key="result_succeed" />
@@ -207,8 +219,8 @@
                     <InArgument x:TypeArguments="x:String" x:Key="smtp_password" />
                     <InArgument x:TypeArguments="x:String" x:Key="smtp_sendername" />
                     <InArgument x:TypeArguments="x:String" x:Key="send_mail_bcc" />
-                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc">["upsky@yaskawa.com.cn" &amp; ";" &amp; "tangzhiqiang@yaskawa.com.cn"]</InArgument>
-                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">gaohuiliang@yaskawa.com.cn</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc">[etrCC]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">[etrTO]</InArgument>
                     <InArgument x:TypeArguments="x:Boolean" x:Key="use_outlook">False</InArgument>
                     <InArgument x:TypeArguments="x:Boolean" x:Key="auto_flag" />
                     <InArgument x:TypeArguments="x:String" x:Key="send_mail_subject">["【RPA处理ERROR通知】变频器每日在库管理表" &amp; Date.Now.ToString("(yyyyMMdd)")]</InArgument>

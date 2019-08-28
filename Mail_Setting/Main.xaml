@@ -121,7 +121,7 @@
             </sap:WorkflowViewStateService.ViewState>
             <WriteLine DisplayName="写入行" sap:VirtualizedContainerService.HintSize="330,63" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="Read mail to setting started." />
             <ui:PathExists DisplayName="路径存在" Exists="[tmpflg]" sap:VirtualizedContainerService.HintSize="330,91" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="[Const_MailTo_Setting_Path_FileName]" PathType="File" />
-            <If Condition="[tmpflg]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="330,53" sap2010:WorkflowViewState.IdRef="If_3">
+            <If Condition="[tmpflg]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="1221,2195" sap2010:WorkflowViewState.IdRef="If_3">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -135,7 +135,7 @@
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel 应用程序范围" sap:VirtualizedContainerService.HintSize="913,1950" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" WorkbookPath="[Const_MailTo_Setting_Path_FileName]">
+                  <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel 应用程序范围" sap:VirtualizedContainerService.HintSize="913,1950" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" Visible="False" WorkbookPath="[Const_MailTo_Setting_Path_FileName]">
                     <ui:ExcelApplicationScope.Body>
                       <ActivityAction x:TypeArguments="ui:WorkbookApplication">
                         <ActivityAction.Argument>
