@@ -72,6 +72,11 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
+  <sap:WorkflowViewStateService.ViewState>
+    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+      <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+    </scg:Dictionary>
+  </sap:WorkflowViewStateService.ViewState>
   <Flowchart DisplayName="流程图" sap:VirtualizedContainerService.HintSize="630,636" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -91,7 +96,7 @@
           <av:Size x:Key="ShapeSize">216,53</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <TryCatch DisplayName="Try Catch 处理" sap:VirtualizedContainerService.HintSize="430,840" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch DisplayName="Try Catch 处理" sap:VirtualizedContainerService.HintSize="1591,3580" sap2010:WorkflowViewState.IdRef="TryCatch_1">
         <TryCatch.Variables>
           <Variable x:TypeArguments="x:Int32" Name="smtp_port" />
           <Variable x:TypeArguments="x:String" Name="smtp_server" />
@@ -102,20 +107,20 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <TryCatch.Try>
-          <Sequence DisplayName="发送邮件" sap:VirtualizedContainerService.HintSize="335,704" sap2010:WorkflowViewState.IdRef="Sequence_14">
+          <Sequence DisplayName="发送邮件" sap:VirtualizedContainerService.HintSize="1557,2592" sap2010:WorkflowViewState.IdRef="Sequence_14">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Sequence DisplayName="发送邮件参数初始化" sap:VirtualizedContainerService.HintSize="297,70" sap2010:WorkflowViewState.IdRef="Sequence_10">
+            <Sequence DisplayName="发送邮件参数初始化" sap:VirtualizedContainerService.HintSize="1519,1301" sap2010:WorkflowViewState.IdRef="Sequence_10">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <If Condition="[isnothing(outlook_account) or outlook_account=&quot;&quot;]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="216,53" sap2010:WorkflowViewState.IdRef="If_1">
+              <If Condition="[isnothing(outlook_account) or outlook_account=&quot;&quot;]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="518,214" sap2010:WorkflowViewState.IdRef="If_1">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -133,14 +138,14 @@
                   </Assign>
                 </If.Then>
               </If>
-              <Sequence DisplayName="smtp 参数" sap:VirtualizedContainerService.HintSize="216,70" sap2010:WorkflowViewState.IdRef="Sequence_9">
+              <Sequence DisplayName="smtp 参数" sap:VirtualizedContainerService.HintSize="518,955" sap2010:WorkflowViewState.IdRef="Sequence_9">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <If Condition="[isnothing(smtp_account) or isnothing(smtp_password) or smtp_account=&quot;&quot; or smtp_password=&quot;&quot;]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="480,53" sap2010:WorkflowViewState.IdRef="If_2">
+                <If Condition="[isnothing(smtp_account) or isnothing(smtp_password) or smtp_account=&quot;&quot; or smtp_password=&quot;&quot;]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="480,407" sap2010:WorkflowViewState.IdRef="If_2">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -203,7 +208,7 @@
                 </If>
               </Sequence>
             </Sequence>
-            <If Condition="[auto_flag]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="297,53" sap2010:WorkflowViewState.IdRef="If_4">
+            <If Condition="[auto_flag]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="1519,214" sap2010:WorkflowViewState.IdRef="If_4">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -226,13 +231,13 @@
                     <OutArgument x:TypeArguments="x:String">[send_mail_body]</OutArgument>
                   </Assign.To>
                   <Assign.Value>
-                    <InArgument x:TypeArguments="x:String">[send_mail_body+vbCrLf+vbCrLf+"此邮件由系统自动发送，请勿回复此邮件，如有问题请联系相关人员。"+vbCrLf+"This email is sent by system. Please DO NOT reply this email. If you have any questions, please contact with whom concerned."]</InArgument>
+                    <InArgument x:TypeArguments="x:String">[send_mail_body+vbCrLf+vbCrLf+"此邮件由系统自动发送，请勿回复此邮件，如有问题请联系相关人员。"+vbCrLf+"This E-Mail is sent by system. Please DO NOT reply this E-Mail. If you have any questions, Please contact with whom concerned."]</InArgument>
                   </Assign.Value>
                 </Assign>
               </If.Else>
             </If>
-            <Delay DisplayName="延迟" Duration="00:00:01" sap:VirtualizedContainerService.HintSize="297,22" sap2010:WorkflowViewState.IdRef="Delay_3" />
-            <If Condition="[use_outlook]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="297,53" sap2010:WorkflowViewState.IdRef="If_7">
+            <Delay DisplayName="延迟" Duration="00:00:01" sap:VirtualizedContainerService.HintSize="1519,22" sap2010:WorkflowViewState.IdRef="Delay_3" />
+            <If Condition="[use_outlook]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="1519,549" sap2010:WorkflowViewState.IdRef="If_7">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -257,10 +262,12 @@
                     <If.Else>
                       <ui:SendMail From="{x:Null}" MailMessage="{x:Null}" TimeoutMS="{x:Null}" Bcc="[send_mail_bcc]" Body="[send_mail_body]" Cc="[send_mail_cc]" DisplayName="发送 SMTP 邮件消息" Email="[smtp_account]" EnableSSL="True" sap:VirtualizedContainerService.HintSize="330,151" sap2010:WorkflowViewState.IdRef="SendMail_5" IsBodyHtml="False" Name="[smtp_sendername]" Password="[smtp_password]" Port="[smtp_port]" SecureConnection="Auto" Server="[smtp_server]" Subject="[send_mail_subject]" To="[send_mail_to]">
                         <ui:SendMail.Files>
-                          <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                          <scg:List x:TypeArguments="InArgument(x:String)" Capacity="8">
                             <InArgument x:TypeArguments="x:String">[send_mail_attachment1]</InArgument>
                             <InArgument x:TypeArguments="x:String">[send_mail_attachment2]</InArgument>
                             <InArgument x:TypeArguments="x:String">[send_mail_attachment3]</InArgument>
+                            <InArgument x:TypeArguments="x:String">[send_mail_attachment4]</InArgument>
+                            <InArgument x:TypeArguments="x:String">[send_mail_attachment5]</InArgument>
                           </scg:List>
                         </ui:SendMail.Files>
                       </ui:SendMail>
@@ -296,10 +303,11 @@
                 </Sequence>
               </If.Else>
             </If>
-            <Sequence DisplayName="发送成功" sap:VirtualizedContainerService.HintSize="297,254" sap2010:WorkflowViewState.IdRef="Sequence_13">
+            <Sequence DisplayName="发送成功" sap:VirtualizedContainerService.HintSize="1519,254" sap2010:WorkflowViewState.IdRef="Sequence_13">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <Assign DisplayName="赋值" sap:VirtualizedContainerService.HintSize="259,61" sap2010:WorkflowViewState.IdRef="Assign_19">
@@ -322,10 +330,10 @@
           </Sequence>
         </TryCatch.Try>
         <TryCatch.Catches>
-          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,670" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="1561,670" sap2010:WorkflowViewState.IdRef="Catch`1_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>

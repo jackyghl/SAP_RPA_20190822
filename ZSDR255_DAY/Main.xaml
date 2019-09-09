@@ -138,16 +138,18 @@
                               <InArgument x:TypeArguments="x:String">tempZSDR255Every</InArgument>
                             </Assign.Value>
                           </Assign>
-                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="821,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="D:\RPA_Demo\SAP_ATUO_LOGIN\SAP_LOGIN.xaml">
+                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="821,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="D:\RPA_Demo\SAP_Login\Main.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
-                              <InOutArgument x:TypeArguments="x:String" x:Key="SAP_LOG" />
-                              <OutArgument x:TypeArguments="x:Boolean" x:Key="SAP_LOG_SUCCEED" />
-                              <InArgument x:TypeArguments="x:String" x:Key="SAP_ID">
+                              <InArgument x:TypeArguments="x:String" x:Key="sap_id">
                                 <Literal x:TypeArguments="x:String" Value="" />
                               </InArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="SAP_PW">
+                              <InArgument x:TypeArguments="x:String" x:Key="sap_pw">
                                 <Literal x:TypeArguments="x:String" Value="" />
                               </InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="sap_testing">True</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="sap_test_id" />
+                              <InArgument x:TypeArguments="x:String" x:Key="sap_test_pw" />
+                              <InOutArgument x:TypeArguments="x:String" x:Key="sap_log" />
                             </ui:InvokeWorkflowFile.Arguments>
                           </ui:InvokeWorkflowFile>
                           <Delay DisplayName="延迟" Duration="00:00:01" sap:VirtualizedContainerService.HintSize="821,22" sap2010:WorkflowViewState.IdRef="Delay_1" />
