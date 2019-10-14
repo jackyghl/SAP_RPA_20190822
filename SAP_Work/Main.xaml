@@ -89,22 +89,22 @@
           <av:Size x:Key="ShapeSize">216,53</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <TryCatch DisplayName="Try Catch 处理" sap:VirtualizedContainerService.HintSize="688,7767" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch DisplayName="Try Catch 处理" sap:VirtualizedContainerService.HintSize="664,4703" sap2010:WorkflowViewState.IdRef="TryCatch_1">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <TryCatch.Try>
-          <Sequence DisplayName="satr1" sap:VirtualizedContainerService.HintSize="654,7138" sap2010:WorkflowViewState.IdRef="Sequence_38">
+          <Sequence DisplayName="satr1" sap:VirtualizedContainerService.HintSize="630,4074" sap2010:WorkflowViewState.IdRef="Sequence_38">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="616,95" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[now.ToString &amp;&quot;:从SAP导出数据started.&quot;]" />
-            <Sequence DisplayName="OPEN_SAP" sap:VirtualizedContainerService.HintSize="616,70" sap2010:WorkflowViewState.IdRef="Sequence_9">
+            <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="592,95" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[now.ToString &amp;&quot;:从SAP导出数据started.&quot;]" />
+            <Sequence DisplayName="OPEN_SAP" sap:VirtualizedContainerService.HintSize="592,70" sap2010:WorkflowViewState.IdRef="Sequence_9">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -124,15 +124,15 @@
                 </ui:InvokeWorkflowFile.Arguments>
               </ui:InvokeWorkflowFile>
             </Sequence>
-            <Delay DisplayName="延迟" Duration="00:00:02" sap:VirtualizedContainerService.HintSize="616,22" sap2010:WorkflowViewState.IdRef="Delay_6" />
-            <Sequence DisplayName="download 1L" sap:VirtualizedContainerService.HintSize="616,6604" sap2010:WorkflowViewState.IdRef="Sequence_20">
+            <Delay DisplayName="延迟" Duration="00:00:02" sap:VirtualizedContainerService.HintSize="592,22" sap2010:WorkflowViewState.IdRef="Delay_6" />
+            <Sequence DisplayName="download 1L" sap:VirtualizedContainerService.HintSize="592,3911" sap2010:WorkflowViewState.IdRef="Sequence_20">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <TryCatch DisplayName="ZMMR340 download" sap:VirtualizedContainerService.HintSize="578,53" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+              <TryCatch DisplayName="ZMMR340 download" sap:VirtualizedContainerService.HintSize="554,53" sap2010:WorkflowViewState.IdRef="TryCatch_2">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -836,7 +836,7 @@
                   </Catch>
                 </TryCatch.Catches>
               </TryCatch>
-              <Sequence DisplayName="download COOIS" sap:VirtualizedContainerService.HintSize="578,70" sap2010:WorkflowViewState.IdRef="Sequence_16">
+              <Sequence DisplayName="download COOIS" sap:VirtualizedContainerService.HintSize="554,70" sap2010:WorkflowViewState.IdRef="Sequence_16">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -1200,14 +1200,14 @@
                   </TryCatch.Catches>
                 </TryCatch>
               </Sequence>
-              <Sequence DisplayName="download ZSDR255" sap:VirtualizedContainerService.HintSize="578,2459" sap2010:WorkflowViewState.IdRef="Sequence_17">
+              <Sequence DisplayName="download ZSDR255" sap:VirtualizedContainerService.HintSize="554,2830" sap2010:WorkflowViewState.IdRef="Sequence_17">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <TryCatch DisplayName="Try Catch 处理" sap:VirtualizedContainerService.HintSize="516,2367" sap2010:WorkflowViewState.IdRef="TryCatch_4">
+                <TryCatch DisplayName="Try Catch 处理" sap:VirtualizedContainerService.HintSize="516,2738" sap2010:WorkflowViewState.IdRef="TryCatch_4">
                   <TryCatch.Try>
                     <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="482,1908" sap2010:WorkflowViewState.IdRef="Sequence_63">
                       <sap:WorkflowViewStateService.ViewState>
@@ -1805,10 +1805,10 @@
                     </Sequence>
                   </TryCatch.Try>
                   <TryCatch.Catches>
-                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="486,141" sap2010:WorkflowViewState.IdRef="Catch`1_4">
+                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="486,512" sap2010:WorkflowViewState.IdRef="Catch`1_4">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
@@ -1816,15 +1816,15 @@
                         <ActivityAction.Argument>
                           <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
                         </ActivityAction.Argument>
-                        <Sequence DisplayName="Error" sap:VirtualizedContainerService.HintSize="216,70" sap2010:WorkflowViewState.IdRef="Sequence_56">
+                        <Sequence DisplayName="Error" sap:VirtualizedContainerService.HintSize="368,441" sap2010:WorkflowViewState.IdRef="Sequence_56">
                           <Sequence.Variables>
                             <Variable x:TypeArguments="x:String" Name="etrTO" />
                             <Variable x:TypeArguments="x:String" Name="etrCC" />
                           </Sequence.Variables>
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                              <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="330,95" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Info" Message="[exception.Source &amp; &quot;:&quot; &amp; exception.Message]" />
@@ -1848,7 +1848,7 @@
                               <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">[etrTO]</InArgument>
                               <InArgument x:TypeArguments="x:Boolean" x:Key="use_outlook">False</InArgument>
                               <InArgument x:TypeArguments="x:Boolean" x:Key="auto_flag" />
-                              <InArgument x:TypeArguments="x:String" x:Key="send_mail_subject">["【RPA处理ERROR通知】 销售订单残导出错误"&amp; Date.Now.ToString("(yyyyMMdd)")]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="send_mail_subject">["【RPA ERROR通知】 销售订单残导出错误"&amp; Date.Now.ToString("(yyyyMMdd)")]</InArgument>
                               <InArgument x:TypeArguments="x:String" x:Key="send_mail_body" xml:space="preserve">["感谢您的使用" &amp; vbcrlf &amp; "处理时发生意外，异常终止原因请参考" &amp; vbcrlf &amp;   exception.Message &amp; vbcrlf &amp; exception.Source &amp; vbcrlf &amp; exception.StackTrace]</InArgument>
                               <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment1" />
                               <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment2" />
@@ -1864,18 +1864,19 @@
                   </TryCatch.Catches>
                 </TryCatch>
               </Sequence>
-              <Sequence DisplayName="download ZMMR260" sap:VirtualizedContainerService.HintSize="578,3685" sap2010:WorkflowViewState.IdRef="Sequence_18">
+              <Sequence DisplayName="download ZMMR260" sap:VirtualizedContainerService.HintSize="554,621" sap2010:WorkflowViewState.IdRef="Sequence_18">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <TryCatch DisplayName="Try Catch 处理" sap:VirtualizedContainerService.HintSize="540,3593" sap2010:WorkflowViewState.IdRef="TryCatch_5">
+                <TryCatch DisplayName="Try Catch 处理" sap:VirtualizedContainerService.HintSize="434,529" sap2010:WorkflowViewState.IdRef="TryCatch_5">
                   <TryCatch.Try>
-                    <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="506,3134" sap2010:WorkflowViewState.IdRef="Sequence_73">
+                    <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="216,70" sap2010:WorkflowViewState.IdRef="Sequence_73">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                       <Sequence DisplayName="获取变式" sap:VirtualizedContainerService.HintSize="468,1160" sap2010:WorkflowViewState.IdRef="Sequence_76">
@@ -2184,7 +2185,7 @@
                     </Sequence>
                   </TryCatch.Try>
                   <TryCatch.Catches>
-                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="510,141" sap2010:WorkflowViewState.IdRef="Catch`1_5">
+                    <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,141" sap2010:WorkflowViewState.IdRef="Catch`1_5">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -2243,7 +2244,7 @@
                   </TryCatch.Catches>
                 </TryCatch>
               </Sequence>
-              <Sequence DisplayName="download MB52" sap:VirtualizedContainerService.HintSize="578,85" sap2010:WorkflowViewState.IdRef="Sequence_19">
+              <Sequence DisplayName="download MB52" sap:VirtualizedContainerService.HintSize="216,85" sap2010:WorkflowViewState.IdRef="Sequence_19">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -2251,14 +2252,14 @@
                 </sap:WorkflowViewStateService.ViewState>
               </Sequence>
             </Sequence>
-            <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="616,95" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Info" Message="[now.ToString &amp;&quot;:从SAP导出数据ended.&quot;]" />
+            <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="592,95" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Info" Message="[now.ToString &amp;&quot;:从SAP导出数据ended.&quot;]" />
           </Sequence>
         </TryCatch.Try>
         <TryCatch.Catches>
-          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="658,311" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="634,311" sap2010:WorkflowViewState.IdRef="Catch`1_1">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
