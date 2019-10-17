@@ -72,11 +72,12 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
         <TryCatch.Try>
-          <Sequence DisplayName="Start" sap:VirtualizedContainerService.HintSize="839,2708" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Start" sap:VirtualizedContainerService.HintSize="839,2870" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="strTO" />
               <Variable x:TypeArguments="x:String" Name="strCC" />
               <Variable x:TypeArguments="x:Boolean" Name="tmpFLG" />
+              <Variable x:TypeArguments="x:Boolean" Name="tempFileflg" />
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -85,7 +86,18 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="797,95" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[now.ToString &amp;&quot;:从SAP导出数据started.&quot;]" />
-            <ui:Delete ContinueOnError="{x:Null}" DisplayName="删除" sap:VirtualizedContainerService.HintSize="797,22" sap2010:WorkflowViewState.IdRef="Delete_1" Path="D:\RPA_Demo\MB52\低压&amp;大金变频器SYD在库台数.xlsx" />
+            <ui:PathExists DisplayName="路径存在" Exists="[tempFileflg]" sap:VirtualizedContainerService.HintSize="797,91" sap2010:WorkflowViewState.IdRef="PathExists_2" Path="D:\RPA_Demo\MB52\低压&amp;大金变频器SYD在库台数.xlsx" PathType="File" />
+            <If Condition="[tempFileflg]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="797,53" sap2010:WorkflowViewState.IdRef="If_2">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If.Then>
+                <ui:Delete ContinueOnError="{x:Null}" DisplayName="删除" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Delete_1" Path="D:\RPA_Demo\MB52\低压&amp;大金变频器SYD在库台数.xlsx" />
+              </If.Then>
+            </If>
             <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="797,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="D:\RPA_Demo\ZMMR340\Main.xaml">
               <ui:InvokeWorkflowFile.Arguments>
                 <scg:Dictionary x:TypeArguments="x:String, Argument" />
