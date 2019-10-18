@@ -81,7 +81,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Try Catch 处理" sap:VirtualizedContainerService.HintSize="712,1844" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch 处理" sap:VirtualizedContainerService.HintSize="712,1303" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Variables>
         <Variable x:TypeArguments="x:Boolean" Name="login_succeed" />
         <Variable x:TypeArguments="x:String" Name="etr_TO" />
@@ -117,7 +117,7 @@
                 <av:PointCollection x:Key="ConnectorLocation">292,197.5 292,247.5</av:PointCollection>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Sequence DisplayName="初始化" sap:VirtualizedContainerService.HintSize="697,1496" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <Sequence DisplayName="初始化" sap:VirtualizedContainerService.HintSize="697,1558" sap2010:WorkflowViewState.IdRef="Sequence_5">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -131,6 +131,7 @@
                   <InArgument x:TypeArguments="x:Boolean">False</InArgument>
                 </Assign.Value>
               </Assign>
+              <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" DisplayName="终止进程" sap:VirtualizedContainerService.HintSize="655,22" sap2010:WorkflowViewState.IdRef="KillProcess_2" ProcessName="saplogon" />
               <If Condition="[(sap_id=&quot;&quot; or sap_pw=&quot;&quot;) and (not sap_testing)]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="655,407" sap2010:WorkflowViewState.IdRef="If_1">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -257,20 +258,20 @@
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:OpenApplication ApplicationWindow="{x:Null}" Arguments="{x:Null}" TimeoutMS="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="打开应用程序 'saplogon.exe SAP'" FileName="C:\Program Files (x86)\SAP\FrontEnd\SAPgui\saplogon.exe" sap:VirtualizedContainerService.HintSize="430,402" sap2010:WorkflowViewState.IdRef="OpenApplication_1" InformativeScreenshot="259ee5fe947ca4fc657c8b5cfcff1bb3" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='SAP Logon 740' /&gt;">
+                  <ui:OpenApplication ApplicationWindow="{x:Null}" Arguments="{x:Null}" TimeoutMS="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="打开应用程序 'saplogon.exe SAP'" FileName="C:\Program Files (x86)\SAP\FrontEnd\SAPgui\saplogon.exe" sap:VirtualizedContainerService.HintSize="434,402" sap2010:WorkflowViewState.IdRef="OpenApplication_1" InformativeScreenshot="259ee5fe947ca4fc657c8b5cfcff1bb3" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='SAP Logon 740' /&gt;">
                     <ui:OpenApplication.Body>
                       <ActivityAction x:TypeArguments="x:Object">
                         <ActivityAction.Argument>
                           <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
                         </ActivityAction.Argument>
-                        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="297,256" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="305,256" sap2010:WorkflowViewState.IdRef="Sequence_12">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <WriteLine DisplayName="写入行" sap:VirtualizedContainerService.HintSize="259,63" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[DateTime.Now.ToString(&quot;yyyy.MM.dd HH:mm:ss&quot;)+&quot;已打开SAP程序&quot;]" />
-                          <Assign DisplayName="赋值" sap:VirtualizedContainerService.HintSize="259,61" sap2010:WorkflowViewState.IdRef="Assign_7">
+                          <WriteLine DisplayName="写入行" sap:VirtualizedContainerService.HintSize="263,63" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[DateTime.Now.ToString(&quot;yyyy.MM.dd HH:mm:ss&quot;)+&quot;已打开SAP程序&quot;]" />
+                          <Assign DisplayName="赋值" sap:VirtualizedContainerService.HintSize="263,61" sap2010:WorkflowViewState.IdRef="Assign_7">
                             <Assign.To>
                               <OutArgument x:TypeArguments="x:String">[sap_log]</OutArgument>
                             </Assign.To>
@@ -711,7 +712,7 @@
         </Flowchart>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="678,682" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="678,141" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -722,15 +723,15 @@
             <ActivityAction.Argument>
               <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
             </ActivityAction.Argument>
-            <Sequence DisplayName="SAP_Login_Error" sap:VirtualizedContainerService.HintSize="376,611" sap2010:WorkflowViewState.IdRef="Sequence_21">
+            <Sequence DisplayName="SAP_Login_Error" sap:VirtualizedContainerService.HintSize="305,543" sap2010:WorkflowViewState.IdRef="Sequence_21">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <WriteLine DisplayName="写入行" sap:VirtualizedContainerService.HintSize="334,63" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="[DateTime.Now.ToString(&quot;yyyy.MM.dd HH:mm:ss&quot;)+&quot;SAP登录模块出错，错误代码：&quot;+exception.Message]" />
-              <Assign DisplayName="赋值" sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="Assign_8">
+              <WriteLine DisplayName="写入行" sap:VirtualizedContainerService.HintSize="263,63" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="[DateTime.Now.ToString(&quot;yyyy.MM.dd HH:mm:ss&quot;)+&quot;SAP登录模块出错，错误代码：&quot;+exception.Message]" />
+              <Assign DisplayName="赋值" sap:VirtualizedContainerService.HintSize="263,61" sap2010:WorkflowViewState.IdRef="Assign_8">
                 <Assign.To>
                   <OutArgument x:TypeArguments="x:String">[sap_log]</OutArgument>
                 </Assign.To>
@@ -738,7 +739,7 @@
                   <InArgument x:TypeArguments="x:String">[sap_log+vbCrLf+DateTime.Now.ToString("yyyy.MM.dd HH:mm:ss")+"SAP登录模块出错，错误代码："+exception.Message]</InArgument>
                 </Assign.Value>
               </Assign>
-              <Assign DisplayName="赋值" sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="Assign_9">
+              <Assign DisplayName="赋值" sap:VirtualizedContainerService.HintSize="263,61" sap2010:WorkflowViewState.IdRef="Assign_9">
                 <Assign.To>
                   <OutArgument x:TypeArguments="x:Boolean">[login_succeed]</OutArgument>
                 </Assign.To>
@@ -746,15 +747,21 @@
                   <InArgument x:TypeArguments="x:Boolean">False</InArgument>
                 </Assign.Value>
               </Assign>
-              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Mail_Setting\Main.xaml">
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="263,53" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Mail_Setting\Main.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
                   <InArgument x:TypeArguments="x:String" x:Key="IN_RPA_ID">Err01</InArgument>
                   <OutArgument x:TypeArguments="x:String" x:Key="OUT_TO">[etr_TO]</OutArgument>
                   <OutArgument x:TypeArguments="x:String" x:Key="OUT_CC">[etr_CC]</OutArgument>
                   <OutArgument x:TypeArguments="x:String" x:Key="OUT_BCC" />
                 </ui:InvokeWorkflowFile.Arguments>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
               </ui:InvokeWorkflowFile>
-              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Send_Mail\Main.xaml">
+              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="263,53" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Send_Mail\Main.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
                   <OutArgument x:TypeArguments="x:Boolean" x:Key="result_succeed" />
                   <OutArgument x:TypeArguments="x:String" x:Key="error_message" />
@@ -775,6 +782,12 @@
                   <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment5" />
                   <InArgument x:TypeArguments="x:String" x:Key="outlook_account" />
                 </ui:InvokeWorkflowFile.Arguments>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
               </ui:InvokeWorkflowFile>
             </Sequence>
           </ActivityAction>
