@@ -1077,9 +1077,9 @@
     "restore": {
       "projectUniqueName": "SAP_work_auto",
       "projectName": "SAP_work_auto",
-      "projectPath": "D:\\RPA_Demo\\SAP_work_auto\\.local",
+      "projectPath": "D:\\Demo_backup\\SAP_RPA_20190822\\SAP_work_auto\\.local",
       "packagesPath": "C:\\Users\\t005\\.nuget\\packages\\",
-      "outputPath": "D:\\RPA_Demo\\SAP_work_auto\\.local"
+      "outputPath": "D:\\Demo_backup\\SAP_RPA_20190822\\SAP_work_auto\\.local"
     },
     "frameworks": {
       "net461": {

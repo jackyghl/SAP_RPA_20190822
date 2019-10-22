@@ -150,7 +150,7 @@
                               <InArgument x:TypeArguments="x:String" x:Key="sap_pw">
                                 <Literal x:TypeArguments="x:String" Value="" />
                               </InArgument>
-                              <InArgument x:TypeArguments="x:Boolean" x:Key="sap_testing">True</InArgument>
+                              <InArgument x:TypeArguments="x:Boolean" x:Key="sap_testing">False</InArgument>
                               <InArgument x:TypeArguments="x:String" x:Key="sap_test_id" />
                               <InArgument x:TypeArguments="x:String" x:Key="sap_test_pw" />
                               <InOutArgument x:TypeArguments="x:String" x:Key="sap_log" />
