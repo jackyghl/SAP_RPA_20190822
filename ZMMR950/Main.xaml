@@ -70,6 +70,7 @@
       <Variable x:TypeArguments="x:Boolean" Name="tempCC" />
       <Variable x:TypeArguments="s:Exception" Name="e" />
       <Variable x:TypeArguments="x:String" Name="strTO" />
+      <Variable x:TypeArguments="x:String" Name="mail_from" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -91,7 +92,7 @@
           <av:PointCollection x:Key="ConnectorLocation">120,111 120,141 450,141 450,163.5</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:GetPOP3MailMessages TimeoutMS="{x:Null}" DeleteMessages="True" DisplayName="获取 POP3 邮件消息" Email="sap_rpa@yaskawa.com.cn" EnableSSL="False" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="GetPOP3MailMessages_1" Messages="[Mail_List]" Password="uti750923F6" Port="110" SecureConnection="Auto" Server="[“pop.yaskawa.com.cn&quot;]" Top="5">
+      <ui:GetPOP3MailMessages TimeoutMS="{x:Null}" DeleteMessages="True" DisplayName="获取 POP3 邮件消息" Email="sap_rpa@yaskawa.com.cn" EnableSSL="False" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="GetPOP3MailMessages_1" Messages="[Mail_List]" Password="uti750923F6" Port="110" SecureConnection="Auto" Server="[“pop.yaskawa.com.cn&quot;]" Top="1">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -113,13 +114,21 @@
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="snm:MailMessage" Name="item" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="正文" sap:VirtualizedContainerService.HintSize="1193,1347" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                <Sequence DisplayName="正文" sap:VirtualizedContainerService.HintSize="1193,1448" sap2010:WorkflowViewState.IdRef="Sequence_7">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="1151,95" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[now.ToString &amp; &quot;开始读取邮件&quot;]" />
+                  <Assign DisplayName="赋值" sap:VirtualizedContainerService.HintSize="1151,61" sap2010:WorkflowViewState.IdRef="Assign_14">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[mail_from]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[item.From.Address]</InArgument>
+                    </Assign.Value>
+                  </Assign>
                   <If Condition="[item.Subject .Contains (&quot;ZMMR950&quot;)]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="1151,985" sap2010:WorkflowViewState.IdRef="If_8">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -155,7 +164,7 @@
                                   <OutArgument x:TypeArguments="x:String">[item.Attachments(i).Name]</OutArgument>
                                 </Assign.To>
                                 <Assign.Value>
-                                  <InArgument x:TypeArguments="x:String">[FileName &amp; DateTime.Now.ToString ("yyyyMMddHHmmss") &amp; ".xlsx"]</InArgument>
+                                  <InArgument x:TypeArguments="x:String">[FileName &amp; DateTime.Now.ToString ("yyyyMMddHH") &amp; ".xlsx"]</InArgument>
                                 </Assign.Value>
                               </Assign>
                               <ui:SaveMailAttachments Attachments="{x:Null}" DisplayName="保存附件" FolderPath="[FilePath]" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="SaveMailAttachments_4" Message="[item]" />
@@ -216,7 +225,7 @@
                   <av:PointCollection x:Key="ConnectorLocation">100,316.5 100,346.5 490,346.5 490,363.5</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <ui:PathExists DisplayName="附件检查" Exists="[tempFLg]" sap:VirtualizedContainerService.HintSize="200,53" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="[FilePath &amp; FileName &amp; DateTime .Now.ToString(&quot;yyyyMMddHHmmss&quot;) &amp; &quot;.xlsx&quot;]" PathType="File">
+              <ui:PathExists DisplayName="附件检查" Exists="[tempFLg]" sap:VirtualizedContainerService.HintSize="200,53" sap2010:WorkflowViewState.IdRef="PathExists_1" Path="[FilePath &amp; FileName &amp; DateTime .Now.ToString(&quot;yyyyMMddHH&quot;) &amp; &quot;.xlsx&quot;]" PathType="File">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -232,288 +241,248 @@
                       <av:Size x:Key="ShapeSize">200,53</av:Size>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <If Condition="[tempFLg]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="2180,5406" sap2010:WorkflowViewState.IdRef="If_6">
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <If.Then>
-                      <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="1759,5253" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                  <TryCatch DisplayName="SAP 转储单保存" sap:VirtualizedContainerService.HintSize="2218,6652" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+                    <TryCatch.Try>
+                      <If Condition="[tempFLg]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="2180,5949" sap2010:WorkflowViewState.IdRef="If_6">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <Sequence DisplayName="登入SAP" sap:VirtualizedContainerService.HintSize="1717,591" sap2010:WorkflowViewState.IdRef="Sequence_16">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="434,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="D:\RPA_Demo\SAP_Login\Main.xaml">
-                            <ui:InvokeWorkflowFile.Arguments>
-                              <InArgument x:TypeArguments="x:String" x:Key="sap_id">
-                                <Literal x:TypeArguments="x:String" Value="" />
-                              </InArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="sap_pw">
-                                <Literal x:TypeArguments="x:String" Value="" />
-                              </InArgument>
-                              <InArgument x:TypeArguments="x:Boolean" x:Key="sap_testing">False</InArgument>
-                              <InArgument x:TypeArguments="x:String" x:Key="sap_test_id" />
-                              <InArgument x:TypeArguments="x:String" x:Key="sap_test_pw" />
-                              <InOutArgument x:TypeArguments="x:String" x:Key="sap_log" />
-                            </ui:InvokeWorkflowFile.Arguments>
-                          </ui:InvokeWorkflowFile>
-                          <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="打开ZMMR950" sap:VirtualizedContainerService.HintSize="434,372" sap2010:WorkflowViewState.IdRef="WindowScope_1" InformativeScreenshot="3e3b2bf2d074991cb59a145f775a2a16" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP 轻松访问 -  用户菜单 Y132_RPA' /&gt;">
-                            <ui:WindowScope.Body>
-                              <ActivityAction x:TypeArguments="x:Object">
-                                <ActivityAction.Argument>
-                                  <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
-                                </ActivityAction.Argument>
-                                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,226" sap2010:WorkflowViewState.IdRef="Sequence_15">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                  <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="输入信息 'OkCodeField  okcd'" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_1" Text="[“ZMMR950”+ &quot;[k(enter)]&quot;]">
-                                    <ui:TypeInto.Target>
-                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="f515dfe9a4d00e4c249ae1b5a3854a8d" Selector="&lt;sap id='tbar[0]/okcd' /&gt;">
-                                        <ui:Target.TimeoutMS>
-                                          <InArgument x:TypeArguments="x:Int32" />
-                                        </ui:Target.TimeoutMS>
-                                        <ui:Target.WaitForReady>
-                                          <InArgument x:TypeArguments="ui:WaitForReady" />
-                                        </ui:Target.WaitForReady>
-                                      </ui:Target>
-                                    </ui:TypeInto.Target>
-                                  </ui:TypeInto>
-                                </Sequence>
-                              </ActivityAction>
-                            </ui:WindowScope.Body>
+                        <If.Then>
+                          <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="1759,5796" sap2010:WorkflowViewState.IdRef="Sequence_17">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                          </ui:WindowScope>
-                        </Sequence>
-                        <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel 应用程序范围" sap:VirtualizedContainerService.HintSize="1717,3347" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" Visible="False" WorkbookPath="[FilePath &amp; FileName &amp; DateTime .Now.ToString (&quot;yyyyMMddHHmmss&quot;) &amp; &quot;.xlsx&quot;]">
-                          <ui:ExcelApplicationScope.Body>
-                            <ActivityAction x:TypeArguments="ui:WorkbookApplication">
-                              <ActivityAction.Argument>
-                                <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
-                              </ActivityAction.Argument>
-                              <Sequence DisplayName="执行" sap:VirtualizedContainerService.HintSize="1683,3238" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                            <Sequence DisplayName="登入SAP" sap:VirtualizedContainerService.HintSize="1717,591" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="434,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="D:\RPA_Demo\SAP_Login\Main.xaml">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InArgument x:TypeArguments="x:String" x:Key="sap_id">
+                                    <Literal x:TypeArguments="x:String" Value="" />
+                                  </InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="sap_pw">
+                                    <Literal x:TypeArguments="x:String" Value="" />
+                                  </InArgument>
+                                  <InArgument x:TypeArguments="x:Boolean" x:Key="sap_testing">False</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="sap_test_id" />
+                                  <InArgument x:TypeArguments="x:String" x:Key="sap_test_pw" />
+                                  <InOutArgument x:TypeArguments="x:String" x:Key="sap_log" />
+                                </ui:InvokeWorkflowFile.Arguments>
+                              </ui:InvokeWorkflowFile>
+                              <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="打开ZMMR950" sap:VirtualizedContainerService.HintSize="434,372" sap2010:WorkflowViewState.IdRef="WindowScope_1" InformativeScreenshot="3e3b2bf2d074991cb59a145f775a2a16" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='SAP 轻松访问 -  用户菜单 Y132_RPA' /&gt;">
+                                <ui:WindowScope.Body>
+                                  <ActivityAction x:TypeArguments="x:Object">
+                                    <ActivityAction.Argument>
+                                      <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                    </ActivityAction.Argument>
+                                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,226" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="输入信息 'OkCodeField  okcd'" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_1" Text="[“ZMMR950”+ &quot;[k(enter)]&quot;]">
+                                        <ui:TypeInto.Target>
+                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="f515dfe9a4d00e4c249ae1b5a3854a8d" Selector="&lt;sap id='tbar[0]/okcd' /&gt;">
+                                            <ui:Target.TimeoutMS>
+                                              <InArgument x:TypeArguments="x:Int32" />
+                                            </ui:Target.TimeoutMS>
+                                            <ui:Target.WaitForReady>
+                                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                                            </ui:Target.WaitForReady>
+                                          </ui:Target>
+                                        </ui:TypeInto.Target>
+                                      </ui:TypeInto>
+                                    </Sequence>
+                                  </ActivityAction>
+                                </ui:WindowScope.Body>
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <ui:ExcelReadRange AddHeaders="True" DataTable="[tempData]" DisplayName="读取范围" sap:VirtualizedContainerService.HintSize="1641,59" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" Range="A1:H1000" SheetName="Sheet1" />
-                                <ui:ForEach x:TypeArguments="sd:DataRow" CurrentIndex="{x:Null}" DisplayName="遍历循环" sap:VirtualizedContainerService.HintSize="1641,2912" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[tempData.Rows]">
-                                  <ui:ForEach.Body>
-                                    <ActivityAction x:TypeArguments="sd:DataRow">
-                                      <ActivityAction.Argument>
-                                        <DelegateInArgument x:TypeArguments="sd:DataRow" Name="item" />
-                                      </ActivityAction.Argument>
-                                      <Sequence DisplayName="正文" sap:VirtualizedContainerService.HintSize="1605,2777" sap2010:WorkflowViewState.IdRef="Sequence_9">
-                                        <sap:WorkflowViewStateService.ViewState>
-                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                          </scg:Dictionary>
-                                        </sap:WorkflowViewStateService.ViewState>
-                                        <If Condition="[item(0).ToString &lt;&gt;&quot;&quot;]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="1563,2685" sap2010:WorkflowViewState.IdRef="If_7">
-                                          <If.Then>
-                                            <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="1418,2534" sap2010:WorkflowViewState.IdRef="Sequence_19">
-                                              <sap:WorkflowViewStateService.ViewState>
-                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                </scg:Dictionary>
-                                              </sap:WorkflowViewStateService.ViewState>
-                                              <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="1376,501" sap2010:WorkflowViewState.IdRef="Sequence_11">
-                                                <sap:WorkflowViewStateService.ViewState>
-                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                                  </scg:Dictionary>
-                                                </sap:WorkflowViewStateService.ViewState>
-                                                <Assign DisplayName="赋值" sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="Assign_11">
-                                                  <Assign.To>
-                                                    <OutArgument x:TypeArguments="x:String">[strNO]</OutArgument>
-                                                  </Assign.To>
-                                                  <Assign.Value>
-                                                    <InArgument x:TypeArguments="x:String">[item(5).ToString]</InArgument>
-                                                  </Assign.Value>
-                                                </Assign>
-                                                <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="输入 TO 编号" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_2" Text="[strNO]">
-                                                  <ui:TypeInto.Target>
-                                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="f877eb41dcb7a3955cd6518df66b3686" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='有关订单的发货' /&gt;&lt;sap id='usr/txtLTHU-TANUM' /&gt;">
-                                                      <ui:Target.TimeoutMS>
-                                                        <InArgument x:TypeArguments="x:Int32" />
-                                                      </ui:Target.TimeoutMS>
-                                                      <ui:Target.WaitForReady>
-                                                        <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                      </ui:Target.WaitForReady>
-                                                    </ui:Target>
-                                                  </ui:TypeInto.Target>
-                                                </ui:TypeInto>
-                                                <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="输入仓库号" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_3" Text="1L0[k(enter)]">
-                                                  <ui:TypeInto.Target>
-                                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="75ae343124343b8b384a3ac5ea1d93fa" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='有关订单的发货' /&gt;&lt;sap id='usr/ctxtLTHU-LGNUM' /&gt;">
-                                                      <ui:Target.TimeoutMS>
-                                                        <InArgument x:TypeArguments="x:Int32" />
-                                                      </ui:Target.TimeoutMS>
-                                                      <ui:Target.WaitForReady>
-                                                        <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                      </ui:Target.WaitForReady>
-                                                    </ui:Target>
-                                                  </ui:TypeInto.Target>
-                                                </ui:TypeInto>
-                                              </Sequence>
-                                              <Delay DisplayName="延迟" Duration="00:00:01" sap:VirtualizedContainerService.HintSize="1376,22" sap2010:WorkflowViewState.IdRef="Delay_1" />
-                                              <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="1376,1839" sap2010:WorkflowViewState.IdRef="Sequence_18">
-                                                <sap:WorkflowViewStateService.ViewState>
-                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                                  </scg:Dictionary>
-                                                </sap:WorkflowViewStateService.ViewState>
-                                                <ui:GetVisibleText FormattedText="{x:Null}" WordsInfo="{x:Null}" DisplayName="转储单是否被确认" sap:VirtualizedContainerService.HintSize="1334,106" sap2010:WorkflowViewState.IdRef="GetVisibleText_1">
-                                                  <ui:GetVisibleText.Target>
-                                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="2d50721c8b567e562833e8a1181286fe" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='有关订单的发货' /&gt;&lt;sap id='sbar/pane[0]' /&gt;">
-                                                      <ui:Target.TimeoutMS>
-                                                        <InArgument x:TypeArguments="x:Int32" />
-                                                      </ui:Target.TimeoutMS>
-                                                      <ui:Target.WaitForReady>
-                                                        <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                      </ui:Target.WaitForReady>
-                                                    </ui:Target>
-                                                  </ui:GetVisibleText.Target>
-                                                  <ui:GetVisibleText.Text>
-                                                    <OutArgument x:TypeArguments="x:String">[tempA]</OutArgument>
-                                                  </ui:GetVisibleText.Text>
-                                                </ui:GetVisibleText>
-                                                <If Condition="[InStr(tempA,tempB)&gt;0]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="1334,1601" sap2010:WorkflowViewState.IdRef="If_9">
+                              </ui:WindowScope>
+                            </Sequence>
+                            <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel 应用程序范围" sap:VirtualizedContainerService.HintSize="1717,3347" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_1" Visible="False" WorkbookPath="[FilePath &amp; FileName &amp; DateTime .Now.ToString (&quot;yyyyMMddHH&quot;) &amp; &quot;.xlsx&quot;]">
+                              <ui:ExcelApplicationScope.Body>
+                                <ActivityAction x:TypeArguments="ui:WorkbookApplication">
+                                  <ActivityAction.Argument>
+                                    <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
+                                  </ActivityAction.Argument>
+                                  <Sequence DisplayName="执行" sap:VirtualizedContainerService.HintSize="1683,3238" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:ExcelReadRange AddHeaders="True" DataTable="[tempData]" DisplayName="读取范围" sap:VirtualizedContainerService.HintSize="1641,59" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" Range="A1:H1000" SheetName="Sheet1" />
+                                    <ui:ForEach x:TypeArguments="sd:DataRow" CurrentIndex="{x:Null}" DisplayName="遍历循环" sap:VirtualizedContainerService.HintSize="1641,2912" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[tempData.Rows]">
+                                      <ui:ForEach.Body>
+                                        <ActivityAction x:TypeArguments="sd:DataRow">
+                                          <ActivityAction.Argument>
+                                            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="item" />
+                                          </ActivityAction.Argument>
+                                          <Sequence DisplayName="正文" sap:VirtualizedContainerService.HintSize="1605,2777" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                                            <sap:WorkflowViewStateService.ViewState>
+                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                              </scg:Dictionary>
+                                            </sap:WorkflowViewStateService.ViewState>
+                                            <If Condition="[item(0).ToString &lt;&gt;&quot;&quot;]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="1563,2685" sap2010:WorkflowViewState.IdRef="If_7">
+                                              <If.Then>
+                                                <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="1418,2534" sap2010:WorkflowViewState.IdRef="Sequence_19">
                                                   <sap:WorkflowViewStateService.ViewState>
                                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                                     </scg:Dictionary>
                                                   </sap:WorkflowViewStateService.ViewState>
-                                                  <If.Then>
-                                                    <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="305,316" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                                                  <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="1376,501" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                                                    <sap:WorkflowViewStateService.ViewState>
+                                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                      </scg:Dictionary>
+                                                    </sap:WorkflowViewStateService.ViewState>
+                                                    <Assign DisplayName="赋值" sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="Assign_11">
+                                                      <Assign.To>
+                                                        <OutArgument x:TypeArguments="x:String">[strNO]</OutArgument>
+                                                      </Assign.To>
+                                                      <Assign.Value>
+                                                        <InArgument x:TypeArguments="x:String">[item(5).ToString]</InArgument>
+                                                      </Assign.Value>
+                                                    </Assign>
+                                                    <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="输入 TO 编号" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_2" Text="[strNO]">
+                                                      <ui:TypeInto.Target>
+                                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="f877eb41dcb7a3955cd6518df66b3686" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='有关订单的发货' /&gt;&lt;sap id='usr/txtLTHU-TANUM' /&gt;">
+                                                          <ui:Target.TimeoutMS>
+                                                            <InArgument x:TypeArguments="x:Int32" />
+                                                          </ui:Target.TimeoutMS>
+                                                          <ui:Target.WaitForReady>
+                                                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                          </ui:Target.WaitForReady>
+                                                        </ui:Target>
+                                                      </ui:TypeInto.Target>
+                                                    </ui:TypeInto>
+                                                    <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="输入仓库号" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_3" Text="1L0[k(enter)]">
+                                                      <ui:TypeInto.Target>
+                                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="75ae343124343b8b384a3ac5ea1d93fa" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='有关订单的发货' /&gt;&lt;sap id='usr/ctxtLTHU-LGNUM' /&gt;">
+                                                          <ui:Target.TimeoutMS>
+                                                            <InArgument x:TypeArguments="x:Int32" />
+                                                          </ui:Target.TimeoutMS>
+                                                          <ui:Target.WaitForReady>
+                                                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                          </ui:Target.WaitForReady>
+                                                        </ui:Target>
+                                                      </ui:TypeInto.Target>
+                                                    </ui:TypeInto>
+                                                  </Sequence>
+                                                  <Delay DisplayName="延迟" Duration="00:00:01" sap:VirtualizedContainerService.HintSize="1376,22" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                                                  <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="1376,1839" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                                                    <sap:WorkflowViewStateService.ViewState>
+                                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                      </scg:Dictionary>
+                                                    </sap:WorkflowViewStateService.ViewState>
+                                                    <ui:GetVisibleText FormattedText="{x:Null}" WordsInfo="{x:Null}" DisplayName="转储单是否被确认" sap:VirtualizedContainerService.HintSize="1334,106" sap2010:WorkflowViewState.IdRef="GetVisibleText_1">
+                                                      <ui:GetVisibleText.Target>
+                                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="2d50721c8b567e562833e8a1181286fe" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='有关订单的发货' /&gt;&lt;sap id='sbar/pane[0]' /&gt;">
+                                                          <ui:Target.TimeoutMS>
+                                                            <InArgument x:TypeArguments="x:Int32" />
+                                                          </ui:Target.TimeoutMS>
+                                                          <ui:Target.WaitForReady>
+                                                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                          </ui:Target.WaitForReady>
+                                                        </ui:Target>
+                                                      </ui:GetVisibleText.Target>
+                                                      <ui:GetVisibleText.Text>
+                                                        <OutArgument x:TypeArguments="x:String">[tempA]</OutArgument>
+                                                      </ui:GetVisibleText.Text>
+                                                    </ui:GetVisibleText>
+                                                    <If Condition="[InStr(tempA,tempB)&gt;0]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="1334,1601" sap2010:WorkflowViewState.IdRef="If_9">
                                                       <sap:WorkflowViewStateService.ViewState>
                                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                                         </scg:Dictionary>
                                                       </sap:WorkflowViewStateService.ViewState>
-                                                      <Assign DisplayName="赋值" sap:VirtualizedContainerService.HintSize="263,61" sap2010:WorkflowViewState.IdRef="Assign_13">
-                                                        <Assign.To>
-                                                          <OutArgument x:TypeArguments="x:Boolean">[tempCC]</OutArgument>
-                                                        </Assign.To>
-                                                        <Assign.Value>
-                                                          <InArgument x:TypeArguments="x:Boolean">True</InArgument>
-                                                        </Assign.Value>
-                                                      </Assign>
-                                                      <Assign DisplayName="赋值" sap:VirtualizedContainerService.HintSize="263,61" sap2010:WorkflowViewState.IdRef="Assign_12">
-                                                        <Assign.To>
-                                                          <OutArgument x:TypeArguments="x:String">[tempC]</OutArgument>
-                                                        </Assign.To>
-                                                        <Assign.Value>
-                                                          <InArgument x:TypeArguments="x:String">[tempC + vbCrlf+strNO]</InArgument>
-                                                        </Assign.Value>
-                                                      </Assign>
-                                                      <ui:Continue DisplayName="继续" sap:VirtualizedContainerService.HintSize="263,22" sap2010:WorkflowViewState.IdRef="Continue_1" />
-                                                    </Sequence>
-                                                  </If.Then>
-                                                  <If.Else>
-                                                    <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="984,1450" sap2010:WorkflowViewState.IdRef="Sequence_27">
-                                                      <sap:WorkflowViewStateService.ViewState>
-                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                        </scg:Dictionary>
-                                                      </sap:WorkflowViewStateService.ViewState>
-                                                      <ui:UiElementExists DisplayName="存在元素 'Titlebar  有关订单的发货'" Exists="[ABflg]" sap:VirtualizedContainerService.HintSize="942,106" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
-                                                        <ui:UiElementExists.Target>
-                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="1b81524fd946186772152b511b1dbe7b" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='有关订单的发货' /&gt;&lt;sap id='titl' /&gt;">
-                                                            <ui:Target.TimeoutMS>
-                                                              <InArgument x:TypeArguments="x:Int32" />
-                                                            </ui:Target.TimeoutMS>
-                                                            <ui:Target.WaitForReady>
-                                                              <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                            </ui:Target.WaitForReady>
-                                                          </ui:Target>
-                                                        </ui:UiElementExists.Target>
-                                                      </ui:UiElementExists>
-                                                      <If Condition="[ABflg]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="942,1212" sap2010:WorkflowViewState.IdRef="If_11">
-                                                        <If.Then>
-                                                          <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="797,1061" sap2010:WorkflowViewState.IdRef="Sequence_26">
-                                                            <sap:WorkflowViewStateService.ViewState>
-                                                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                              </scg:Dictionary>
-                                                            </sap:WorkflowViewStateService.ViewState>
-                                                            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="单击   保存 " sap:VirtualizedContainerService.HintSize="755,106" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT">
-                                                              <ui:Click.CursorPosition>
-                                                                <ui:CursorPosition Position="Center">
-                                                                  <ui:CursorPosition.OffsetX>
-                                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                                  </ui:CursorPosition.OffsetX>
-                                                                  <ui:CursorPosition.OffsetY>
-                                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                                  </ui:CursorPosition.OffsetY>
-                                                                </ui:CursorPosition>
-                                                              </ui:Click.CursorPosition>
-                                                              <ui:Click.Target>
-                                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="b3d847926ac33c337ca6e63532b5b8d7" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='有关订单的发货' /&gt;&lt;sap id='tbar[0]/btn[11]' /&gt;">
-                                                                  <ui:Target.TimeoutMS>
-                                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                                  </ui:Target.TimeoutMS>
-                                                                  <ui:Target.WaitForReady>
-                                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                                  </ui:Target.WaitForReady>
-                                                                </ui:Target>
-                                                              </ui:Click.Target>
-                                                              <sap:WorkflowViewStateService.ViewState>
-                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                                                </scg:Dictionary>
-                                                              </sap:WorkflowViewStateService.ViewState>
-                                                            </ui:Click>
-                                                            <Delay DisplayName="延迟" Duration="00:00:01" sap:VirtualizedContainerService.HintSize="755,22" sap2010:WorkflowViewState.IdRef="Delay_2" />
-                                                            <ui:GetVisibleText FormattedText="{x:Null}" WordsInfo="{x:Null}" DisplayName="转储单保存结果判断" sap:VirtualizedContainerService.HintSize="755,106" sap2010:WorkflowViewState.IdRef="GetVisibleText_2">
-                                                              <ui:GetVisibleText.Target>
-                                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="3b4b10a06501a9e43ef84f7b55f2c889" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='有关订单的发货' /&gt;&lt;sap id='usr/tblSAPMZMM0040ZMSGTBL' tableCol='1' tableRow='0' /&gt;">
-                                                                  <ui:Target.TimeoutMS>
-                                                                    <InArgument x:TypeArguments="x:Int32" />
-                                                                  </ui:Target.TimeoutMS>
-                                                                  <ui:Target.WaitForReady>
-                                                                    <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                                  </ui:Target.WaitForReady>
-                                                                </ui:Target>
-                                                              </ui:GetVisibleText.Target>
-                                                              <ui:GetVisibleText.Text>
-                                                                <OutArgument x:TypeArguments="x:String">[tempAA]</OutArgument>
-                                                              </ui:GetVisibleText.Text>
-                                                            </ui:GetVisibleText>
-                                                            <If Condition="[InStr(tempAA,tempAB)&gt;0]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="755,615" sap2010:WorkflowViewState.IdRef="If_10">
-                                                              <sap:WorkflowViewStateService.ViewState>
-                                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                                                </scg:Dictionary>
-                                                              </sap:WorkflowViewStateService.ViewState>
-                                                              <If.Then>
-                                                                <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="发送热键" sap:VirtualizedContainerService.HintSize="334,118" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="f3" KeyModifiers="None" SpecialKey="True">
-                                                                  <ui:SendHotkey.Target>
-                                                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}">
+                                                      <If.Then>
+                                                        <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="305,316" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                                                          <sap:WorkflowViewStateService.ViewState>
+                                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                            </scg:Dictionary>
+                                                          </sap:WorkflowViewStateService.ViewState>
+                                                          <Assign DisplayName="赋值" sap:VirtualizedContainerService.HintSize="263,61" sap2010:WorkflowViewState.IdRef="Assign_13">
+                                                            <Assign.To>
+                                                              <OutArgument x:TypeArguments="x:Boolean">[tempCC]</OutArgument>
+                                                            </Assign.To>
+                                                            <Assign.Value>
+                                                              <InArgument x:TypeArguments="x:Boolean">True</InArgument>
+                                                            </Assign.Value>
+                                                          </Assign>
+                                                          <Assign DisplayName="赋值" sap:VirtualizedContainerService.HintSize="263,61" sap2010:WorkflowViewState.IdRef="Assign_12">
+                                                            <Assign.To>
+                                                              <OutArgument x:TypeArguments="x:String">[tempC]</OutArgument>
+                                                            </Assign.To>
+                                                            <Assign.Value>
+                                                              <InArgument x:TypeArguments="x:String">[tempC + vbCrlf+strNO]</InArgument>
+                                                            </Assign.Value>
+                                                          </Assign>
+                                                          <ui:Continue DisplayName="继续" sap:VirtualizedContainerService.HintSize="263,22" sap2010:WorkflowViewState.IdRef="Continue_1" />
+                                                        </Sequence>
+                                                      </If.Then>
+                                                      <If.Else>
+                                                        <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="984,1450" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                                                          <sap:WorkflowViewStateService.ViewState>
+                                                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                            </scg:Dictionary>
+                                                          </sap:WorkflowViewStateService.ViewState>
+                                                          <ui:UiElementExists DisplayName="存在元素 'Titlebar  有关订单的发货'" Exists="[ABflg]" sap:VirtualizedContainerService.HintSize="942,106" sap2010:WorkflowViewState.IdRef="UiElementExists_2">
+                                                            <ui:UiElementExists.Target>
+                                                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="1b81524fd946186772152b511b1dbe7b" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='有关订单的发货' /&gt;&lt;sap id='titl' /&gt;">
+                                                                <ui:Target.TimeoutMS>
+                                                                  <InArgument x:TypeArguments="x:Int32" />
+                                                                </ui:Target.TimeoutMS>
+                                                                <ui:Target.WaitForReady>
+                                                                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                                </ui:Target.WaitForReady>
+                                                              </ui:Target>
+                                                            </ui:UiElementExists.Target>
+                                                          </ui:UiElementExists>
+                                                          <If Condition="[ABflg]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="942,1212" sap2010:WorkflowViewState.IdRef="If_11">
+                                                            <If.Then>
+                                                              <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="797,1061" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                                                                <sap:WorkflowViewStateService.ViewState>
+                                                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                  </scg:Dictionary>
+                                                                </sap:WorkflowViewStateService.ViewState>
+                                                                <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="单击   保存 " sap:VirtualizedContainerService.HintSize="755,106" sap2010:WorkflowViewState.IdRef="Click_2" KeyModifiers="None" MouseButton="BTN_LEFT">
+                                                                  <ui:Click.CursorPosition>
+                                                                    <ui:CursorPosition Position="Center">
+                                                                      <ui:CursorPosition.OffsetX>
+                                                                        <InArgument x:TypeArguments="x:Int32" />
+                                                                      </ui:CursorPosition.OffsetX>
+                                                                      <ui:CursorPosition.OffsetY>
+                                                                        <InArgument x:TypeArguments="x:Int32" />
+                                                                      </ui:CursorPosition.OffsetY>
+                                                                    </ui:CursorPosition>
+                                                                  </ui:Click.CursorPosition>
+                                                                  <ui:Click.Target>
+                                                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="b3d847926ac33c337ca6e63532b5b8d7" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='有关订单的发货' /&gt;&lt;sap id='tbar[0]/btn[11]' /&gt;">
                                                                       <ui:Target.TimeoutMS>
                                                                         <InArgument x:TypeArguments="x:Int32" />
                                                                       </ui:Target.TimeoutMS>
@@ -521,244 +490,363 @@
                                                                         <InArgument x:TypeArguments="ui:WaitForReady" />
                                                                       </ui:Target.WaitForReady>
                                                                     </ui:Target>
-                                                                  </ui:SendHotkey.Target>
-                                                                </ui:SendHotkey>
-                                                              </If.Then>
-                                                              <If.Else>
-                                                                <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="376,464" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                                                                  </ui:Click.Target>
                                                                   <sap:WorkflowViewStateService.ViewState>
                                                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                                                     </scg:Dictionary>
                                                                   </sap:WorkflowViewStateService.ViewState>
-                                                                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Mail_Setting\Main.xaml">
-                                                                    <ui:InvokeWorkflowFile.Arguments>
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="IN_RPA_ID">CK01</InArgument>
-                                                                      <OutArgument x:TypeArguments="x:String" x:Key="OUT_TO">[strTO]</OutArgument>
-                                                                      <OutArgument x:TypeArguments="x:String" x:Key="OUT_CC" />
-                                                                      <OutArgument x:TypeArguments="x:String" x:Key="OUT_BCC" />
-                                                                    </ui:InvokeWorkflowFile.Arguments>
-                                                                  </ui:InvokeWorkflowFile>
-                                                                  <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Send_Mail\Main.xaml">
-                                                                    <ui:InvokeWorkflowFile.Arguments>
-                                                                      <OutArgument x:TypeArguments="x:Boolean" x:Key="result_succeed" />
-                                                                      <OutArgument x:TypeArguments="x:String" x:Key="error_message" />
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="smtp_account" />
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="smtp_password" />
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="smtp_sendername" />
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="send_mail_bcc" />
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc" />
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">[strTO]</InArgument>
-                                                                      <InArgument x:TypeArguments="x:Boolean" x:Key="use_outlook">False</InArgument>
-                                                                      <InArgument x:TypeArguments="x:Boolean" x:Key="auto_flag" />
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="send_mail_subject">["【RPA ERROR】SYD转储单异常" &amp; Date.Now.ToString("(yyyyMMdd)")]</InArgument>
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="send_mail_body">["转储单号：" &amp; strNO &amp; "有图号是定量品，因此无法进行转储单确认！"]</InArgument>
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment1" />
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment2" />
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment3" />
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment4" />
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment5" />
-                                                                      <InArgument x:TypeArguments="x:String" x:Key="outlook_account" />
-                                                                    </ui:InvokeWorkflowFile.Arguments>
-                                                                  </ui:InvokeWorkflowFile>
-                                                                  <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="发送热键" sap:VirtualizedContainerService.HintSize="334,118" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="f3" KeyModifiers="None" SpecialKey="True">
-                                                                    <ui:SendHotkey.Target>
-                                                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}">
-                                                                        <ui:Target.TimeoutMS>
-                                                                          <InArgument x:TypeArguments="x:Int32" />
-                                                                        </ui:Target.TimeoutMS>
-                                                                        <ui:Target.WaitForReady>
-                                                                          <InArgument x:TypeArguments="ui:WaitForReady" />
-                                                                        </ui:Target.WaitForReady>
-                                                                      </ui:Target>
-                                                                    </ui:SendHotkey.Target>
-                                                                  </ui:SendHotkey>
-                                                                </Sequence>
-                                                              </If.Else>
-                                                            </If>
-                                                          </Sequence>
-                                                        </If.Then>
-                                                      </If>
-                                                    </Sequence>
-                                                  </If.Else>
-                                                </If>
-                                              </Sequence>
-                                            </Sequence>
-                                          </If.Then>
-                                        </If>
-                                      </Sequence>
-                                    </ActivityAction>
-                                  </ui:ForEach.Body>
-                                </ui:ForEach>
-                                <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="1641,95" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[now.ToString(&quot;yyyy.MM.dd&quot;) &amp; &quot;转储单保存结束&quot;]">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                </ui:LogMessage>
-                              </Sequence>
-                            </ActivityAction>
-                          </ui:ExcelApplicationScope.Body>
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                        </ui:ExcelApplicationScope>
-                        <Sequence DisplayName="Close SAP" sap:VirtualizedContainerService.HintSize="1717,1033" sap2010:WorkflowViewState.IdRef="Sequence_28">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="附加窗口 'saplogon.exe  有关订单的发货'" sap:VirtualizedContainerService.HintSize="434,372" sap2010:WorkflowViewState.IdRef="WindowScope_2" InformativeScreenshot="f6763fe8de1fc3a21714448afbc95b9d" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='有关订单的发货' /&gt;">
-                            <ui:WindowScope.Body>
-                              <ActivityAction x:TypeArguments="x:Object">
-                                <ActivityAction.Argument>
-                                  <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
-                                </ActivityAction.Argument>
-                                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,226" sap2010:WorkflowViewState.IdRef="Sequence_32">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                  <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="输入信息 'OkCodeField  okcd'" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_4" Text="/nex[k(enter)]">
-                                    <ui:TypeInto.Target>
-                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="1fb1f5ac355ea03a9094d208267ccb2d" Selector="&lt;sap id='tbar[0]/okcd' /&gt;">
-                                        <ui:Target.TimeoutMS>
-                                          <InArgument x:TypeArguments="x:Int32" />
-                                        </ui:Target.TimeoutMS>
-                                        <ui:Target.WaitForReady>
-                                          <InArgument x:TypeArguments="ui:WaitForReady" />
-                                        </ui:Target.WaitForReady>
-                                      </ui:Target>
-                                    </ui:TypeInto.Target>
-                                  </ui:TypeInto>
-                                </Sequence>
-                              </ActivityAction>
-                            </ui:WindowScope.Body>
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                          </ui:WindowScope>
-                          <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="附加窗口 'saplogon.exe SAP'" sap:VirtualizedContainerService.HintSize="434,394" sap2010:WorkflowViewState.IdRef="WindowScope_3" InformativeScreenshot="359fef1283f1b5604212ebca89f50985" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='SAP Logon 740' /&gt;">
-                            <ui:WindowScope.Body>
-                              <ActivityAction x:TypeArguments="x:Object">
-                                <ActivityAction.Argument>
-                                  <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
-                                </ActivityAction.Argument>
-                                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,248" sap2010:WorkflowViewState.IdRef="Sequence_33">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                  <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="发送热键 'saplogon.exe SAP'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="SendHotkey_3" Key="f4" KeyModifiers="Alt" SpecialKey="True">
-                                    <ui:SendHotkey.Target>
-                                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" InformativeScreenshot="075667f33f4b0ff1d415954322c47b18">
-                                        <ui:Target.TimeoutMS>
-                                          <InArgument x:TypeArguments="x:Int32" />
-                                        </ui:Target.TimeoutMS>
-                                        <ui:Target.WaitForReady>
-                                          <InArgument x:TypeArguments="ui:WaitForReady" />
-                                        </ui:Target.WaitForReady>
-                                      </ui:Target>
-                                    </ui:SendHotkey.Target>
-                                  </ui:SendHotkey>
-                                </Sequence>
-                              </ActivityAction>
-                            </ui:WindowScope.Body>
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                          </ui:WindowScope>
-                          <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="434,95" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[now.ToString(&quot;yyyy.MM.dd&quot;) &amp; &quot;关闭SAP系统&quot;]">
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                          </ui:LogMessage>
-                        </Sequence>
-                        <Sequence DisplayName="异常转储单邮件发送" sap:VirtualizedContainerService.HintSize="1717,70" sap2010:WorkflowViewState.IdRef="Sequence_37">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                              <x:Boolean x:Key="IsPinned">True</x:Boolean>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <If Condition="[tempCC]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="621,521" sap2010:WorkflowViewState.IdRef="If_13">
-                            <If.Then>
-                              <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="376,368" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                                                                </ui:Click>
+                                                                <Delay DisplayName="延迟" Duration="00:00:01" sap:VirtualizedContainerService.HintSize="755,22" sap2010:WorkflowViewState.IdRef="Delay_2" />
+                                                                <ui:GetVisibleText FormattedText="{x:Null}" WordsInfo="{x:Null}" DisplayName="转储单保存结果判断" sap:VirtualizedContainerService.HintSize="755,106" sap2010:WorkflowViewState.IdRef="GetVisibleText_2">
+                                                                  <ui:GetVisibleText.Target>
+                                                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="3b4b10a06501a9e43ef84f7b55f2c889" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='有关订单的发货' /&gt;&lt;sap id='usr/tblSAPMZMM0040ZMSGTBL' tableCol='1' tableRow='0' /&gt;">
+                                                                      <ui:Target.TimeoutMS>
+                                                                        <InArgument x:TypeArguments="x:Int32" />
+                                                                      </ui:Target.TimeoutMS>
+                                                                      <ui:Target.WaitForReady>
+                                                                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                                      </ui:Target.WaitForReady>
+                                                                    </ui:Target>
+                                                                  </ui:GetVisibleText.Target>
+                                                                  <ui:GetVisibleText.Text>
+                                                                    <OutArgument x:TypeArguments="x:String">[tempAA]</OutArgument>
+                                                                  </ui:GetVisibleText.Text>
+                                                                </ui:GetVisibleText>
+                                                                <If Condition="[InStr(tempAA,tempAB)&gt;0]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="755,615" sap2010:WorkflowViewState.IdRef="If_10">
+                                                                  <sap:WorkflowViewStateService.ViewState>
+                                                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                                                    </scg:Dictionary>
+                                                                  </sap:WorkflowViewStateService.ViewState>
+                                                                  <If.Then>
+                                                                    <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="发送热键" sap:VirtualizedContainerService.HintSize="334,118" sap2010:WorkflowViewState.IdRef="SendHotkey_1" Key="f3" KeyModifiers="None" SpecialKey="True">
+                                                                      <ui:SendHotkey.Target>
+                                                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}">
+                                                                          <ui:Target.TimeoutMS>
+                                                                            <InArgument x:TypeArguments="x:Int32" />
+                                                                          </ui:Target.TimeoutMS>
+                                                                          <ui:Target.WaitForReady>
+                                                                            <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                                          </ui:Target.WaitForReady>
+                                                                        </ui:Target>
+                                                                      </ui:SendHotkey.Target>
+                                                                    </ui:SendHotkey>
+                                                                  </If.Then>
+                                                                  <If.Else>
+                                                                    <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="376,464" sap2010:WorkflowViewState.IdRef="Sequence_25">
+                                                                      <sap:WorkflowViewStateService.ViewState>
+                                                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                                        </scg:Dictionary>
+                                                                      </sap:WorkflowViewStateService.ViewState>
+                                                                      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Mail_Setting\Main.xaml">
+                                                                        <ui:InvokeWorkflowFile.Arguments>
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="IN_RPA_ID">CK01</InArgument>
+                                                                          <OutArgument x:TypeArguments="x:String" x:Key="OUT_TO">[strTO]</OutArgument>
+                                                                          <OutArgument x:TypeArguments="x:String" x:Key="OUT_CC" />
+                                                                          <OutArgument x:TypeArguments="x:String" x:Key="OUT_BCC" />
+                                                                        </ui:InvokeWorkflowFile.Arguments>
+                                                                      </ui:InvokeWorkflowFile>
+                                                                      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Send_Mail\Main.xaml">
+                                                                        <ui:InvokeWorkflowFile.Arguments>
+                                                                          <OutArgument x:TypeArguments="x:Boolean" x:Key="result_succeed" />
+                                                                          <OutArgument x:TypeArguments="x:String" x:Key="error_message" />
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="smtp_account" />
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="smtp_password" />
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="smtp_sendername" />
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="send_mail_bcc" />
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc" />
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">[strTO]</InArgument>
+                                                                          <InArgument x:TypeArguments="x:Boolean" x:Key="use_outlook">False</InArgument>
+                                                                          <InArgument x:TypeArguments="x:Boolean" x:Key="auto_flag" />
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="send_mail_subject">["【RPA ERROR】SYD转储单异常" &amp; Date.Now.ToString("(yyyyMMdd)")]</InArgument>
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="send_mail_body">["转储单号：" &amp; strNO &amp; "有图号是定量品，因此无法进行转储单确认！"]</InArgument>
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment1" />
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment2" />
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment3" />
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment4" />
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment5" />
+                                                                          <InArgument x:TypeArguments="x:String" x:Key="outlook_account" />
+                                                                        </ui:InvokeWorkflowFile.Arguments>
+                                                                      </ui:InvokeWorkflowFile>
+                                                                      <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="发送热键" sap:VirtualizedContainerService.HintSize="334,118" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="f3" KeyModifiers="None" SpecialKey="True">
+                                                                        <ui:SendHotkey.Target>
+                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}">
+                                                                            <ui:Target.TimeoutMS>
+                                                                              <InArgument x:TypeArguments="x:Int32" />
+                                                                            </ui:Target.TimeoutMS>
+                                                                            <ui:Target.WaitForReady>
+                                                                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                                                                            </ui:Target.WaitForReady>
+                                                                          </ui:Target>
+                                                                        </ui:SendHotkey.Target>
+                                                                      </ui:SendHotkey>
+                                                                    </Sequence>
+                                                                  </If.Else>
+                                                                </If>
+                                                              </Sequence>
+                                                            </If.Then>
+                                                          </If>
+                                                        </Sequence>
+                                                      </If.Else>
+                                                    </If>
+                                                  </Sequence>
+                                                </Sequence>
+                                              </If.Then>
+                                            </If>
+                                          </Sequence>
+                                        </ActivityAction>
+                                      </ui:ForEach.Body>
+                                    </ui:ForEach>
+                                    <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="1641,95" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[now.ToString(&quot;yyyy.MM.dd&quot;) &amp; &quot;转储单保存结束&quot;]">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                    </ui:LogMessage>
+                                  </Sequence>
+                                </ActivityAction>
+                              </ui:ExcelApplicationScope.Body>
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </ui:ExcelApplicationScope>
+                            <Sequence DisplayName="Close SAP" sap:VirtualizedContainerService.HintSize="1717,1033" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="附加窗口 'saplogon.exe  有关订单的发货'" sap:VirtualizedContainerService.HintSize="434,372" sap2010:WorkflowViewState.IdRef="WindowScope_2" InformativeScreenshot="f6763fe8de1fc3a21714448afbc95b9d" Selector="&lt;wnd app='saplogon.exe' cls='SAP_FRONTEND_SESSION' title='有关订单的发货' /&gt;">
+                                <ui:WindowScope.Body>
+                                  <ActivityAction x:TypeArguments="x:Object">
+                                    <ActivityAction.Argument>
+                                      <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                    </ActivityAction.Argument>
+                                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,226" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:TypeInto ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="输入信息 'OkCodeField  okcd'" sap:VirtualizedContainerService.HintSize="334,134" sap2010:WorkflowViewState.IdRef="TypeInto_4" Text="/nex[k(enter)]">
+                                        <ui:TypeInto.Target>
+                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" InformativeScreenshot="1fb1f5ac355ea03a9094d208267ccb2d" Selector="&lt;sap id='tbar[0]/okcd' /&gt;">
+                                            <ui:Target.TimeoutMS>
+                                              <InArgument x:TypeArguments="x:Int32" />
+                                            </ui:Target.TimeoutMS>
+                                            <ui:Target.WaitForReady>
+                                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                                            </ui:Target.WaitForReady>
+                                          </ui:Target>
+                                        </ui:TypeInto.Target>
+                                      </ui:TypeInto>
+                                    </Sequence>
+                                  </ActivityAction>
+                                </ui:WindowScope.Body>
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Mail_Setting\Main.xaml">
-                                  <ui:InvokeWorkflowFile.Arguments>
-                                    <InArgument x:TypeArguments="x:String" x:Key="IN_RPA_ID">CK01</InArgument>
-                                    <OutArgument x:TypeArguments="x:String" x:Key="OUT_TO">[strTO]</OutArgument>
-                                    <OutArgument x:TypeArguments="x:String" x:Key="OUT_CC" />
-                                    <OutArgument x:TypeArguments="x:String" x:Key="OUT_BCC" />
-                                  </ui:InvokeWorkflowFile.Arguments>
-                                </ui:InvokeWorkflowFile>
-                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Send_Mail\Main.xaml">
-                                  <ui:InvokeWorkflowFile.Arguments>
-                                    <OutArgument x:TypeArguments="x:Boolean" x:Key="result_succeed" />
-                                    <OutArgument x:TypeArguments="x:String" x:Key="error_message" />
-                                    <InArgument x:TypeArguments="x:String" x:Key="smtp_account" />
-                                    <InArgument x:TypeArguments="x:String" x:Key="smtp_password" />
-                                    <InArgument x:TypeArguments="x:String" x:Key="smtp_sendername" />
-                                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_bcc" />
-                                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc" />
-                                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">[strTO]</InArgument>
-                                    <InArgument x:TypeArguments="x:Boolean" x:Key="use_outlook">False</InArgument>
-                                    <InArgument x:TypeArguments="x:Boolean" x:Key="auto_flag" />
-                                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_subject">["【RPA ERROR】SYD转储单异常" &amp; Date.Now.ToString("(yyyyMMdd)")]</InArgument>
-                                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_body">["异常转储单如下：" &amp; tempC]</InArgument>
-                                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment1" />
-                                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment2" />
-                                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment3" />
-                                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment4" />
-                                    <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment5" />
-                                    <InArgument x:TypeArguments="x:String" x:Key="outlook_account" />
-                                  </ui:InvokeWorkflowFile.Arguments>
-                                </ui:InvokeWorkflowFile>
-                                <ui:MoveFile ContinueOnError="{x:Null}" Destination="[“D:\RPA_File\Mail\NG”]" DisplayName="移动文件" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="MoveFile_4" Overwrite="False" Path="[FilePath &amp; FileName &amp; DateTime .Now.ToString (&quot;yyyyMMddHHmmss&quot;) &amp; &quot;.xlsx&quot;]" />
-                              </Sequence>
-                            </If.Then>
-                            <If.Else>
-                              <ui:MoveFile ContinueOnError="{x:Null}" Destination="[“D:\RPA_File\Mail\OK”]" DisplayName="移动文件" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="MoveFile_5" Overwrite="False" Path="[FilePath &amp; FileName &amp; DateTime .Now.ToString (&quot;yyyyMMddHHmmss&quot;) &amp; &quot;.xlsx&quot;]" />
-                            </If.Else>
-                          </If>
-                        </Sequence>
-                      </Sequence>
-                    </If.Then>
-                    <If.Else>
-                      <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="376,187" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                              </ui:WindowScope>
+                              <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="附加窗口 'saplogon.exe SAP'" sap:VirtualizedContainerService.HintSize="434,394" sap2010:WorkflowViewState.IdRef="WindowScope_3" InformativeScreenshot="359fef1283f1b5604212ebca89f50985" Selector="&lt;wnd app='saplogon.exe' cls='#32770' title='SAP Logon 740' /&gt;">
+                                <ui:WindowScope.Body>
+                                  <ActivityAction x:TypeArguments="x:Object">
+                                    <ActivityAction.Argument>
+                                      <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                    </ActivityAction.Argument>
+                                    <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,248" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                                      <sap:WorkflowViewStateService.ViewState>
+                                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                        </scg:Dictionary>
+                                      </sap:WorkflowViewStateService.ViewState>
+                                      <ui:SendHotkey ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" Activate="True" DisplayName="发送热键 'saplogon.exe SAP'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="SendHotkey_3" Key="f4" KeyModifiers="Alt" SpecialKey="True">
+                                        <ui:SendHotkey.Target>
+                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" InformativeScreenshot="075667f33f4b0ff1d415954322c47b18">
+                                            <ui:Target.TimeoutMS>
+                                              <InArgument x:TypeArguments="x:Int32" />
+                                            </ui:Target.TimeoutMS>
+                                            <ui:Target.WaitForReady>
+                                              <InArgument x:TypeArguments="ui:WaitForReady" />
+                                            </ui:Target.WaitForReady>
+                                          </ui:Target>
+                                        </ui:SendHotkey.Target>
+                                      </ui:SendHotkey>
+                                    </Sequence>
+                                  </ActivityAction>
+                                </ui:WindowScope.Body>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:WindowScope>
+                              <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="434,95" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[now.ToString(&quot;yyyy.MM.dd&quot;) &amp; &quot;关闭SAP系统&quot;]">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                              </ui:LogMessage>
+                            </Sequence>
+                            <Sequence DisplayName="异常转储单邮件发送" sap:VirtualizedContainerService.HintSize="1717,613" sap2010:WorkflowViewState.IdRef="Sequence_37">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <If Condition="[tempCC]" DisplayName="IF条件" sap:VirtualizedContainerService.HintSize="797,521" sap2010:WorkflowViewState.IdRef="If_13">
+                                <If.Then>
+                                  <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="376,368" sap2010:WorkflowViewState.IdRef="Sequence_36">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Mail_Setting\Main.xaml">
+                                      <ui:InvokeWorkflowFile.Arguments>
+                                        <InArgument x:TypeArguments="x:String" x:Key="IN_RPA_ID">CK01</InArgument>
+                                        <OutArgument x:TypeArguments="x:String" x:Key="OUT_TO">[strTO]</OutArgument>
+                                        <OutArgument x:TypeArguments="x:String" x:Key="OUT_CC" />
+                                        <OutArgument x:TypeArguments="x:String" x:Key="OUT_BCC" />
+                                      </ui:InvokeWorkflowFile.Arguments>
+                                    </ui:InvokeWorkflowFile>
+                                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Send_Mail\Main.xaml">
+                                      <ui:InvokeWorkflowFile.Arguments>
+                                        <OutArgument x:TypeArguments="x:Boolean" x:Key="result_succeed" />
+                                        <OutArgument x:TypeArguments="x:String" x:Key="error_message" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="smtp_account" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="smtp_password" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="smtp_sendername" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_bcc" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">[mail_from]</InArgument>
+                                        <InArgument x:TypeArguments="x:Boolean" x:Key="use_outlook">False</InArgument>
+                                        <InArgument x:TypeArguments="x:Boolean" x:Key="auto_flag" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_subject">["【RPA ERROR】SYD转储单异常" &amp; Date.Now.ToString("(yyyyMMdd)")]</InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_body">["异常转储单如下：" &amp; tempC]</InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment1" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment2" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment3" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment4" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment5" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="outlook_account" />
+                                      </ui:InvokeWorkflowFile.Arguments>
+                                    </ui:InvokeWorkflowFile>
+                                    <ui:MoveFile ContinueOnError="{x:Null}" Destination="[“D:\RPA_File\Mail\NG”]" DisplayName="移动文件" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="MoveFile_4" Overwrite="True" Path="[FilePath &amp; FileName &amp; DateTime .Now.ToString (&quot;yyyyMMddHH&quot;) &amp; &quot;.xlsx&quot;]" />
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="376,241" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                                    <sap:WorkflowViewStateService.ViewState>
+                                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                      </scg:Dictionary>
+                                    </sap:WorkflowViewStateService.ViewState>
+                                    <ui:MoveFile ContinueOnError="{x:Null}" Destination="[“D:\RPA_File\Mail\OK”]" DisplayName="移动文件" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="MoveFile_5" Overwrite="True" Path="[FilePath &amp; FileName &amp; DateTime .Now.ToString (&quot;yyyyMMddHH&quot;) &amp; &quot;.xlsx&quot;]" />
+                                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Send_Mail\Main.xaml">
+                                      <ui:InvokeWorkflowFile.Arguments>
+                                        <OutArgument x:TypeArguments="x:Boolean" x:Key="result_succeed" />
+                                        <OutArgument x:TypeArguments="x:String" x:Key="error_message" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="smtp_account" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="smtp_password" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="smtp_sendername" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_bcc" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">[mail_from]</InArgument>
+                                        <InArgument x:TypeArguments="x:Boolean" x:Key="use_outlook">False</InArgument>
+                                        <InArgument x:TypeArguments="x:Boolean" x:Key="auto_flag" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_subject">["【RPA 】SYD转储单处理结果" &amp; Date.Now.ToString("(yyyyMMdd)")]</InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_body" xml:space="preserve">["感谢您的使用" &amp; vbcrlf &amp; vbcrlf &amp; "   您发送的转储单已经处理完毕，处理明细请见附件！"  &amp; vbcrlf &amp; "      (SYD  经管部 IT课)"]</InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment1">[FilePath &amp; “OK\” &amp; FileName &amp; DateTime .Now.ToString ("yyyyMMddHH") &amp; ".xlsx"]</InArgument>
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment2" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment3" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment4" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment5" />
+                                        <InArgument x:TypeArguments="x:String" x:Key="outlook_account" />
+                                      </ui:InvokeWorkflowFile.Arguments>
+                                    </ui:InvokeWorkflowFile>
+                                  </Sequence>
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <Sequence DisplayName="序列" sap:VirtualizedContainerService.HintSize="376,187" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="334,95" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;没有转储单文件&quot;]" />
+                          </Sequence>
+                        </If.Else>
+                      </If>
+                    </TryCatch.Try>
+                    <TryCatch.Catches>
+                      <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="2184,385" sap2010:WorkflowViewState.IdRef="Catch`1_1">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="334,95" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;没有转储单文件&quot;]" />
-                      </Sequence>
-                    </If.Else>
-                  </If>
+                        <ActivityAction x:TypeArguments="s:Exception">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Error" sap:VirtualizedContainerService.HintSize="376,314" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:LogMessage DisplayName="日志消息" sap:VirtualizedContainerService.HintSize="334,95" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[exception.Source &amp; &quot;:&quot; &amp; exception.Message]" />
+                            <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="调用工作流文件" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="D:\RPA_Demo\Send_Mail\Main.xaml">
+                              <ui:InvokeWorkflowFile.Arguments>
+                                <OutArgument x:TypeArguments="x:Boolean" x:Key="result_succeed" />
+                                <OutArgument x:TypeArguments="x:String" x:Key="error_message" />
+                                <InArgument x:TypeArguments="x:String" x:Key="smtp_account" />
+                                <InArgument x:TypeArguments="x:String" x:Key="smtp_password" />
+                                <InArgument x:TypeArguments="x:String" x:Key="smtp_sendername" />
+                                <InArgument x:TypeArguments="x:String" x:Key="send_mail_bcc" />
+                                <InArgument x:TypeArguments="x:String" x:Key="send_mail_cc" />
+                                <InArgument x:TypeArguments="x:String" x:Key="send_mail_to">gaohuiliang@yaskawa.com.cn</InArgument>
+                                <InArgument x:TypeArguments="x:Boolean" x:Key="use_outlook">False</InArgument>
+                                <InArgument x:TypeArguments="x:Boolean" x:Key="auto_flag" />
+                                <InArgument x:TypeArguments="x:String" x:Key="send_mail_subject" xml:space="preserve">["【RPA  ERROR】SAP转储单异常" &amp; Date.Now.ToString("(yyyyMMdd)")]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="send_mail_body" xml:space="preserve">["感谢您的使用" &amp; vbcrlf &amp; "处理发生异常，异常原因可参考：" &amp; vbcrlf &amp;   exception.Message &amp; vbcrlf &amp; exception.Source &amp; vbcrlf &amp; exception.StackTrace]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment1" />
+                                <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment2" />
+                                <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment3" />
+                                <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment4" />
+                                <InArgument x:TypeArguments="x:String" x:Key="send_mail_attachment5" />
+                                <InArgument x:TypeArguments="x:String" x:Key="outlook_account" />
+                              </ui:InvokeWorkflowFile.Arguments>
+                            </ui:InvokeWorkflowFile>
+                          </Sequence>
+                        </ActivityAction>
+                      </Catch>
+                    </TryCatch.Catches>
+                  </TryCatch>
                 </FlowStep>
               </FlowStep.Next>
             </FlowStep>

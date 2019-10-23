@@ -1077,9 +1077,9 @@
     "restore": {
       "projectUniqueName": "SAP_Login",
       "projectName": "SAP_Login",
-      "projectPath": "D:\\RPA_Demo\\SAP_Login\\.local",
+      "projectPath": "D:\\Demo_backup\\SAP_RPA_20190822\\SAP_Login\\.local",
       "packagesPath": "C:\\Users\\t005\\.nuget\\packages\\",
-      "outputPath": "D:\\RPA_Demo\\SAP_Login\\.local"
+      "outputPath": "D:\\Demo_backup\\SAP_RPA_20190822\\SAP_Login\\.local"
     },
     "frameworks": {
       "net461": {

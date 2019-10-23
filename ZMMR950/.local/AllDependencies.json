@@ -1301,9 +1301,9 @@
     "restore": {
       "projectUniqueName": "ZMMR950",
       "projectName": "ZMMR950",
-      "projectPath": "D:\\RPA_Demo\\ZMMR950\\.local",
+      "projectPath": "D:\\Demo_backup\\SAP_RPA_20190822\\ZMMR950\\.local",
       "packagesPath": "C:\\Users\\t005\\.nuget\\packages\\",
-      "outputPath": "D:\\RPA_Demo\\ZMMR950\\.local"
+      "outputPath": "D:\\Demo_backup\\SAP_RPA_20190822\\ZMMR950\\.local"
     },
     "frameworks": {
       "net461": {
